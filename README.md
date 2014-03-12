@@ -1,5 +1,6 @@
-Jhon-s-magical-adventure
-Autors:
-	Adrián Carboneras Mas
-	Borja Villarino García
+Jhon's magical adventure
 ========================
+Autors:
+
+	Adrián Carboneras Mas 
+	Borja Villarino García
