@@ -66,6 +66,8 @@ package objects
 				
 				drawTile(i, cont, actualRow, actualColumn, _dim);
 				
+				
+				
 				actualColumn++;
 				cont++;
 				
@@ -81,7 +83,15 @@ package objects
 		}
 		
 		private function drawTile(numTile:int, index:int, row:int, column:int, dim:int):void {
-			this.tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + numTile));
+			if (numTile != 0) 
+			{
+				this.tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + numTile));
+			}
+			else 
+			{
+				this.tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + 1));
+				this.tiles[index].visible = false;
+			}
 			
 			this.tiles[index].x =(_sectorX * (_numColumns * (_dim))) + column * _dim;
 			this.tiles[index].y =(_sectorY * (_numRows * (_dim))) + row * _dim;
@@ -94,11 +104,20 @@ package objects
 		}
 		
 		private function refreshMap():void {
-			if (this._editor != null && this._editor.changeMapTile ) 
+			if (this._editor != null && this._editor.actualXSector == this._sectorX && this._editor.actualYSector == this._sectorY && this._editor.changeMapTile ) 
 			{
-				var index:int = this._editor.Yposition * this._numColumns + this._editor.Xposition;
+				var index:int = (this._editor.sectorYPos * this._numColumns) + this._editor.sectorXPos;
 				this.matrix[index] = this._editor.tileToChange;
-				this.tiles[index].texture = Assets.getAtlas().getTexture(this._type + this.matrix[index]);
+				if (this._editor.tileToChange != 0) 
+				{
+					this.tiles[index].visible = true;
+					this.tiles[index].texture = Assets.getAtlas().getTexture(this._type + this.matrix[index]);
+				}
+				else 
+				{
+					this.tiles[index].visible = false;
+					this.tiles[index].texture = Assets.getAtlas().getTexture(this._type + 1);
+				}
 				this._editor.changeMapTile = false;
 			}
 			
@@ -108,10 +127,25 @@ package objects
 			if (this._editor.sendTrace) 
 			{
 				trace("Layer " + this._layer + ": " + this.matrix);
+				var index:int = (this._editor.Yposition * this._numColumns) / (this._sectorY + 1) + this._editor.Xposition / (this._sectorX + 1);
+				trace();
 				this._editor.sendTrace = false;
 			}
 		}
-		
+		private function loadLayer():void {
+			for (var i:int = 0; i < matrix.length; i++) 
+			{
+				if (matrix[i] != 0) 
+				{
+					this.tiles[i].visible = true;
+				}
+			}
+		}
+		private function saveLayer():void {
+			for (var i:int = 0; i < tiles.length; i++) 
+			{
+				this.tiles[i].visible = false;
+			}
+		}
 	}
-
 }

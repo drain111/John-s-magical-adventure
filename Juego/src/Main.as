@@ -6,7 +6,7 @@ package
 	import screens.GameWorld;
 	import starling.core.Starling;
 
-	[SWF(frameRate = "60", width = "800", height = "600", backgroundColor = "0x333333")]
+	[SWF(frameRate = "60", width = "500", height = "500", backgroundColor = "0x333333")]
 	
 	/**
 	 * ...
@@ -14,7 +14,7 @@ package
 	 */
 	public class Main extends Sprite 
 	{
-		//private var stats:Stats;
+		private var stats:Stats;
 		private var starling:Starling;
 		
 		public function Main():void 
@@ -27,8 +27,8 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			//stats = new Stats();
-			//addChild(stats);
+			stats = new Stats();
+			addChild(stats);
 			
 			starling = new Starling(Game, stage);
 			starling.antiAliasing = 0;

@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'27/02/2014'</value>
+      <value>'12/03/2014'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -32,20 +32,20 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Borja\Desktop\Juego diseño y desarrollo de juegos web\Juego\src</path-element>
-      <path-element>C:\Users\Borja\Desktop\Juego diseño y desarrollo de juegos web\Hi-ReS-Stats-master\src</path-element>
-      <path-element>C:\Users\Borja\Desktop\Juego diseño y desarrollo de juegos web\PrimaryFeather-Starling-Framework-1a50854\starling\src</path-element>
-      <path-element>C:\Users\Borja\Desktop\Juego diseño y desarrollo de juegos web\greensock-as3</path-element>
-      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
+      <path-element>C:\Users\al264081\Desktop\Juego diseño y desarrollo de juegos web v2\Juego\src</path-element>
+      <path-element>C:\Users\al264081\Desktop\Juego diseño y desarrollo de juegos web v2\Hi-ReS-Stats-master\src</path-element>
+      <path-element>C:\Users\al264081\Desktop\Juego diseño y desarrollo de juegos web v2\PrimaryFeather-Starling-Framework-1a50854\starling\src</path-element>
+      <path-element>C:\Users\al264081\Desktop\Juego diseño y desarrollo de juegos web v2\greensock-as3</path-element>
+      <path-element>C:\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Borja\Desktop\Juego diseño y desarrollo de juegos web\Juego\src\Main.as</path-element>
+    <path-element>C:\Users\al264081\Desktop\Juego diseño y desarrollo de juegos web v2\Juego\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>60</default-frame-rate>
   <default-size>
-    <width>800</width>
-    <height>600</height>
+    <width>400</width>
+    <height>400</height>
   </default-size>
 </flex-config>

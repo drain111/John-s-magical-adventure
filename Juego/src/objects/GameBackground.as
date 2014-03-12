@@ -12,7 +12,9 @@ package objects
 		private var _sectorX:int;
 		private var _sectorY:int;
 		
-		private var tileMap:Array;
+		private var terrainMap:Array;
+		private var roadsMap:Array;
+		private var objectsAndWallsMap:Array;
 		
 		private var _editor:Editor;
 		
@@ -22,8 +24,11 @@ package objects
 		public var rows:int;
 		public var columns:int;
 		
+		private var loaded:Boolean = false;
 		
-		private var bgLayer1:BgLayer;
+		private var terrainLayer:BgLayer;
+		private var roadsLayer:BgLayer;
+		private var objectsAndWallsLayer:BgLayer;
 		
 		public function GameBackground(sectorX:int, sectorY:int, editor:Editor) 
 		{
@@ -35,12 +40,12 @@ package objects
 			_editor = editor;
 			
 			
-			tileDimension = 35;
+			tileDimension = 36;
 			
 			_editor.editorDim =  tileDimension;
 			
-			rows = 600 / tileDimension ;//+// 1;
-			columns = 800 / tileDimension ;// + 1;
+			rows = 500 / tileDimension + 1;
+			columns = 500 / tileDimension + 1;
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -48,19 +53,35 @@ package objects
 		private function onAddedToStage(event:Event):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			tileMap = new Array();
-			createVoidTileMap(tileMap, rows, columns);
-			bgLayer1 = new BgLayer("terrain", _sectorX, _sectorY, 1, rows, columns, tileDimension, tileMap, editor, true);
-			this.addChild(bgLayer1);
+			terrainMap = new Array();
+			createVoidTileMap(terrainMap, rows, columns, true);
+			terrainLayer = new BgLayer("terrain", _sectorX, _sectorY, 1, rows, columns, tileDimension, terrainMap, editor, true);
 			
+			roadsMap = new Array();
+			createVoidTileMap(roadsMap, rows, columns, false);
+			roadsLayer = new BgLayer("terrain", _sectorX, _sectorY, 2, rows, columns, tileDimension, roadsMap, editor, true);
+			
+			objectsAndWallsMap = new Array();
+			createVoidTileMap(objectsAndWallsMap, rows, columns, false);
+			objectsAndWallsLayer = new BgLayer("terrain", _sectorX, _sectorY, 3, rows, columns, tileDimension, objectsAndWallsMap, editor, true);
+			
+			this.addChild(terrainLayer);
+			this.addChild(roadsLayer);
+			this.addChild(objectsAndWallsLayer);
 			
 			this.addChild(editor);
 		}
 		
-		private static function createVoidTileMap(map:Array, rows:int, columns:int):void {
+		private static function createVoidTileMap(map:Array, rows:int, columns:int, visible:Boolean):void {
+			
 			for (var i:int = 0; i < rows * columns; i++) 
 			{
-				map.push(1);
+				if (visible) 
+				{
+					map.push(1);
+				}
+				else map.push(0);
+				
 			}
 		}
 		

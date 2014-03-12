@@ -3,6 +3,7 @@ package screens
 	import objects.Camera;
 	import objects.Editor;
 	import objects.GameBackground;
+	import objects.GameFrontground;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	/**
@@ -11,10 +12,10 @@ package screens
 	 */
 	public class GameWorld extends Sprite 
 	{
-		private var sector_0_0:GameBackground;
-		private var sector_1_0:GameBackground;
-		private var sector_0_1:GameBackground;
-		private var sector_1_1:GameBackground;
+		private var backgroundMap:Vector.<GameBackground>;
+		private var frontgroundMap:Vector.<GameFrontground>;
+		private var XSectors:int = 2;
+		private var YSectors:int = 2;
 		private var camera:Camera;
 		
 		private var editor:Editor;
@@ -32,17 +33,13 @@ package screens
 		}
 		
 		private function drawGame():void {
-			editor = new Editor();
-			sector_0_0 = new GameBackground(0, 0, editor);
-			this.addChild(sector_0_0);
-			sector_1_0 = new GameBackground(1, 0, editor);
-			this.addChild(sector_1_0);
-			sector_0_1 = new GameBackground(0, 1, editor);
-			this.addChild(sector_0_1);
-			sector_1_1 = new GameBackground(1, 1, editor);
-			this.addChild(sector_1_1);
+			backgroundMap = new Vector.<GameBackground>;
+			frontgroundMap = new Vector.<GameFrontground>;
+			editor = new Editor( 500 / 36 + 1, 500 / 36 + 1, XSectors, YSectors);
+			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
-			this.camera = new Camera(sector_0_0.editor.image);
+			createFrontgroundMap(frontgroundMap, XSectors, YSectors, editor);
+			this.camera = new Camera(this.editor.image);
 			this.addChild(camera);
 			this.addEventListener(Event.ENTER_FRAME, update);
 		}
@@ -59,6 +56,46 @@ package screens
 		
 		public function disposeTemporarily():void {
 			this.visible = false;
+		}
+		
+		public function createBackgroundMap(map:Vector.<GameBackground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
+			
+			var cont:int = 0;
+			var contX:int = 0;
+			
+			while (cont < numXSectors * numberYSectors) 
+			{
+				var contY:int = 0;
+				
+				while (contY < numberYSectors) 
+				{
+					map.push(new GameBackground(contX, contY, editor));
+					this.addChild(map[cont]);
+					contY++;
+					cont++;
+				}
+				contX++;
+			}
+		}
+		
+		public function createFrontgroundMap(map:Vector.<GameFrontground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
+			
+			var cont:int = 0;
+			var contX:int = 0;
+			
+			while (cont < numXSectors * numberYSectors) 
+			{
+				var contY:int = 0;
+				
+				while (contY < numberYSectors) 
+				{
+					map.push(new GameFrontground(contX, contY, editor));
+					this.addChild(map[cont]);
+					contY++;
+					cont++;
+				}
+				contX++;
+			}
 		}
 	}
 
