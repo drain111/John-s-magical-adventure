@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:16a432738898d2b62a52141b7095208f:697a9665b2e1146868d64e3a5dd728b4:34dd15f328e3b24bd15123c5f7094c28$ -->
+<TextureAtlas imagePath="myspritesheet.png">
+    <SubTexture name="terrain_1" x="2" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_10" x="33" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_11" x="64" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_12" x="95" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_13" x="126" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_14" x="157" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_15" x="188" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_16" x="219" y="2" width="30" height="30"/>
+    <SubTexture name="terrain_17" x="2" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_18" x="33" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_2" x="64" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_3" x="95" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_4" x="126" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_5" x="157" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_6" x="188" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_7" x="219" y="33" width="30" height="30"/>
+    <SubTexture name="terrain_8" x="2" y="64" width="30" height="30"/>
+    <SubTexture name="terrain_9" x="33" y="64" width="30" height="30"/>
+</TextureAtlas>
