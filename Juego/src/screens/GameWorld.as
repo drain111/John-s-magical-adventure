@@ -15,6 +15,7 @@ package screens
 	import starling.utils.deg2rad;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 
 
 	import starling.core.Starling;
@@ -96,12 +97,14 @@ package screens
 		
 		private function createparticle(e:TouchEvent):void 
 		{
-			var touch:Touch = e.getTouch(this)
-			if (touch)
+			var touch:Touch = e.getTouch(this);
+			if (touch.phase == TouchPhase.MOVED)
 			{
+
 				var localPos:Point = touch.getLocation(this);
 				createMagicParticles(localPos);
 			}
+			
 		
 			
 		}
