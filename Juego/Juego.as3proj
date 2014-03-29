@@ -19,6 +19,7 @@
     <class path="..\Hi-ReS-Stats-master\src" />
     <class path="..\PrimaryFeather-Starling-Framework-1a50854\starling\src" />
     <class path="..\greensock-as3" />
+    <class path="..\Starling-Extension-Particle-System-master\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -45,7 +46,7 @@
     <option linkReport="" />
     <option loadExterns="" />
     <option staticLinkRSL="True" />
-    <option additional="" />
+    <option additional="-locale en_US -swf-version=13" />
     <option compilerConstants="" />
     <option minorVersion="" />
   </build>
@@ -89,7 +90,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Default" />
-    <option testMovieCommand="" />
+    <option testMovieCommand="chrome" />
   </options>
   <!-- Plugin storage -->
   <storage />
