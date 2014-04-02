@@ -29,12 +29,17 @@ package screens
 	{
 		private var backgroundMap:Vector.<GameBackground>;
 		private var frontgroundMap:Vector.<GameFrontground>;
-		private var XSectors:int = 2;
-		private var YSectors:int = 2;
+		/*Editado hoy*/
+		private var loadedBackgroundMaps:Vector.<GameBackground>;
+		private var loadedFrontgroundMaps:Vector.<GameFrontground>;
+		/*-----------*/
+		private var XSectors:int = 30;
+		private var YSectors:int = 30;
 		private var camera:Camera;
 		
-		private var editor:Editor;
 		
+		private var editor:Editor;
+		private var lastSector:Point;
 		
 		/* trial */
 
@@ -58,13 +63,22 @@ package screens
 		private function drawGame():void {
 			backgroundMap = new Vector.<GameBackground>;
 			frontgroundMap = new Vector.<GameFrontground>;
+			
+			/*Editado hoy*/
+			loadedBackgroundMaps = new Vector.<GameBackground>;
+			loadedFrontgroundMaps = new Vector.<GameFrontground>;
+			/*-----------*/
+			
 			editor = new Editor( 500 / 36 + 1, 500 / 36 + 1, XSectors, YSectors);
+			/*Editado hoy*/
+			lastSector = new Point(editor.actualXSector, editor.actualYSector);
+			/*-----------*/
 			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
 			createFrontgroundMap(frontgroundMap, XSectors, YSectors, editor);
 			this.camera = new Camera(this.editor.image);
 			this.addChild(camera);
-			
+			reloadMaps();
 			/* todo */
 			particle = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
 			Starling.juggler.add(particle);
@@ -79,12 +93,93 @@ package screens
 		
 		private function update(e:Event):void 
 		{
-			this.x = GlobalVariables.posCameraX;
-			this.y = GlobalVariables.posCameraY;
+			this.x = camera.posX;
+			this.y = camera.posY;
+			
+			/*Editado hoy*/
+			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
+			
+			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
+				lastSector = actualSector;
+				reloadMaps();
+			}
+			/*-----------*/
 			
 			animatemagicParticles();
 			
 		}
+		
+		/*Editado hoy*/
+		private function reloadMaps():void 
+		{
+			if (loadedBackgroundMaps.length > 0) 
+			{
+				removeBackground();
+				removeFrontground();
+				this.removeChild(editor);
+				//this.removeChild(camera);
+			}
+			
+			var sectors:Vector.<int> = new Vector.<int>;
+			sectors.push(returnSectorIndex(lastSector.x - 1, lastSector.y - 1));
+			sectors.push(returnSectorIndex(lastSector.x, lastSector.y - 1));
+			sectors.push(returnSectorIndex(lastSector.x + 1, lastSector.y - 1));
+			sectors.push(returnSectorIndex(lastSector.x - 1, lastSector.y));
+			sectors.push(returnSectorIndex(lastSector.x, lastSector.y));
+			sectors.push(returnSectorIndex(lastSector.x + 1, lastSector.y));
+			sectors.push(returnSectorIndex(lastSector.x - 1, lastSector.y + 1));
+			sectors.push(returnSectorIndex(lastSector.x, lastSector.y + 1));
+			sectors.push(returnSectorIndex(lastSector.x + 1, lastSector.y + 1));
+			
+			for (var i:int = 0; i < sectors.length; i++) 
+			{
+				loadedBackgroundMaps.push(backgroundMap[sectors[i]]);
+				loadedFrontgroundMaps.push(frontgroundMap[sectors[i]]);
+			}
+			for (var j:int = 0; j < loadedBackgroundMaps.length; j++) 
+			{
+				this.addChild(loadedBackgroundMaps[j]);
+			}
+			for (var k:int = 0; k < loadedFrontgroundMaps.length; k++) 
+			{
+				this.addChild(loadedFrontgroundMaps[k]);
+			}
+			this.addChild(editor);
+			//this.addChild(camera);
+			
+		}
+		
+		public function removeFrontground():void {
+			for (var i:int = 0; i <loadedFrontgroundMaps.length; i++) 
+			{
+				this.removeChild(loadedFrontgroundMaps[i]);
+			}
+			loadedFrontgroundMaps.splice(0, loadedFrontgroundMaps.length);
+		}
+		
+		public function removeBackground():void {
+			for (var i:int = 0; i <loadedBackgroundMaps.length; i++) 
+			{
+				this.removeChild(loadedBackgroundMaps[i]);
+			}
+			loadedBackgroundMaps.splice(0, loadedBackgroundMaps.length);
+		}
+		
+		private function returnSectorIndex(x:int, y:int):int {
+			var XToCalculate:int;
+			var YToCalculate:int;
+			
+			if (x <= 0) XToCalculate = 0;	
+			else if (x >= XSectors)	XToCalculate = XSectors - 1;
+			else XToCalculate = x;
+			
+			if (y<= 0) YToCalculate = 0;
+			else if (y >= YSectors) YToCalculate = YSectors - 1;
+			else YToCalculate = y;
+			
+			return XSectors * XToCalculate + YToCalculate;
+		}
+		/*-----------*/
 		
 		public function initialize():void {
 			this.visible = true;
@@ -95,8 +190,7 @@ package screens
 			
 		}
 		
-		private function createparticle(e:TouchEvent):void 
-		{
+		private function createparticle(e:TouchEvent):void {
 			var touch:Touch = e.getTouch(this);
 			if (touch.phase == TouchPhase.MOVED)
 			{
@@ -125,7 +219,7 @@ package screens
 				while (contY < numberYSectors) 
 				{
 					map.push(new GameBackground(contX, contY, editor));
-					this.addChild(map[cont]);
+					//this.addChild(map[cont]);
 					contY++;
 					cont++;
 				}
@@ -145,15 +239,15 @@ package screens
 				while (contY < numberYSectors) 
 				{
 					map.push(new GameFrontground(contX, contY, editor));
-					this.addChild(map[cont]);
+					//this.addChild(map[cont]);
 					contY++;
 					cont++;
 				}
 				contX++;
 			}
 		}
-		private function createMagicParticles(itemToTrack:Point):void 
-		{
+		
+		private function createMagicParticles(itemToTrack:Point):void {
 			
 			var count:int = 5;
 			
@@ -175,8 +269,8 @@ package screens
 				magicParticlesToAnimate.push(MagicParticle);
 			}
 		}
-		private function animatemagicParticles():void 
-		{
+		
+		private function animatemagicParticles():void {
 			for (var i:uint = 0; i < magicParticlesToAnimate.length; i++ )
 			{
 				var magicParticleToTrack:Particle = magicParticlesToAnimate[i];
@@ -204,6 +298,7 @@ package screens
 				}
 			}
 		}
+		
 	}
 
 }
