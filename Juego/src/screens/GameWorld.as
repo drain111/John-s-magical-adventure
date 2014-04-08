@@ -1,5 +1,6 @@
 package screens 
 {
+	import objects.Player;
 	import flash.geom.Point;
 	import objects.Camera;
 	import objects.Editor;
@@ -45,6 +46,8 @@ package screens
 
 		private var particle:PDParticleSystem;
 		private var magicParticlesToAnimate:Vector.<Particle>;
+		
+		private var player:Player;
 
 
 		
@@ -88,14 +91,27 @@ package screens
 			particle.scaleY = 1.2;
 			this.addChild(particle);
 			
+			
+			/* player  */
+			player = new Player();
+			player.x = 1;
+			player.y = 1;
+			this.addChild(player);
+			
 			this.addEventListener(Event.ENTER_FRAME, update);
+			
 		}
+		
+	
 		
 		private function update(e:Event):void 
 		{
 			this.x = camera.posX;
 			this.y = camera.posY;
 			
+			player.x += 1;
+			player.y += 1; 
+		
 			/*Editado hoy*/
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
 			
@@ -104,6 +120,8 @@ package screens
 				reloadMaps();
 			}
 			/*-----------*/
+			
+			
 			
 			animatemagicParticles();
 			
@@ -117,6 +135,7 @@ package screens
 				removeBackground();
 				removeFrontground();
 				this.removeChild(editor);
+				//this.removeChild(jugador);
 				//this.removeChild(camera);
 			}
 			
@@ -144,7 +163,9 @@ package screens
 			{
 				this.addChild(loadedFrontgroundMaps[k]);
 			}
+
 			this.addChild(editor);
+			//this.addChild(jugador);
 			//this.addChild(camera);
 			
 		}
