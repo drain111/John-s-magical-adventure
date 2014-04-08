@@ -45,7 +45,7 @@ package screens
 		/* trial */
 
 		private var particle:PDParticleSystem;
-		private var magicParticlesToAnimate:Vector.<Particle>;
+		
 		
 		private var player:Player;
 
@@ -62,6 +62,7 @@ package screens
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			drawGame();
 		}
+		
 		
 		private function drawGame():void {
 			backgroundMap = new Vector.<GameBackground>;
@@ -83,13 +84,15 @@ package screens
 			this.addChild(camera);
 			reloadMaps();
 			/* todo */
-			particle = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
+			
+			var particle:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
 			Starling.juggler.add(particle);
-			particle.x = camera.x;
-			particle.y = camera.y;
+			particle.x = -100;
+			particle.y = -100;
 			particle.scaleX = 1.2;
 			particle.scaleY = 1.2;
 			this.addChild(particle);
+			
 			
 			
 			/* player  */
@@ -109,8 +112,8 @@ package screens
 			this.x = camera.posX;
 			this.y = camera.posY;
 			
-			player.x += 1;
-			player.y += 1; 
+			player.x = editor.Xposition;
+			player.y = editor.Yposition; 
 		
 			/*Editado hoy*/
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
@@ -120,11 +123,7 @@ package screens
 				reloadMaps();
 			}
 			/*-----------*/
-			
-			
-			
-			animatemagicParticles();
-			
+						
 		}
 		
 		/*Editado hoy*/
@@ -135,7 +134,7 @@ package screens
 				removeBackground();
 				removeFrontground();
 				this.removeChild(editor);
-				//this.removeChild(jugador);
+				//this.removeChild(player);
 				//this.removeChild(camera);
 			}
 			
@@ -165,7 +164,7 @@ package screens
 			}
 
 			this.addChild(editor);
-			//this.addChild(jugador);
+			//this.addChild(player);
 			//this.addChild(camera);
 			
 		}
@@ -205,24 +204,9 @@ package screens
 		public function initialize():void {
 			this.visible = true;
 			
-			
-			magicParticlesToAnimate = new Vector.<Particle>();
-			this.addEventListener(TouchEvent.TOUCH, createparticle);
-			
 		}
 		
-		private function createparticle(e:TouchEvent):void {
-			var touch:Touch = e.getTouch(this);
-			if (touch.phase == TouchPhase.MOVED)
-			{
-
-				var localPos:Point = touch.getLocation(this);
-				createMagicParticles(localPos);
-			}
-			
 		
-			
-		}
 		
 		public function disposeTemporarily():void {
 			this.visible = false;
@@ -268,58 +252,9 @@ package screens
 			}
 		}
 		
-		private function createMagicParticles(itemToTrack:Point):void {
-			
-			var count:int = 5;
-			
-			while (count > 0)
-			{
-				count--;
-				
-				var MagicParticle:Particle = new Particle();
-				this.addChild(MagicParticle);
-				
-				MagicParticle.x = itemToTrack.x;
-				MagicParticle.y = itemToTrack.y;
-				
-				MagicParticle.speedX = Math.random() * 2 + 1;
-				MagicParticle.speedY = Math.random() * 5;
-				MagicParticle.spin = Math.random() * 15;
-				MagicParticle.scaleX = MagicParticle.scaleY = Math.random() * 0.3 + 0.3;
-				
-				magicParticlesToAnimate.push(MagicParticle);
-			}
-		}
 		
-		private function animatemagicParticles():void {
-			for (var i:uint = 0; i < magicParticlesToAnimate.length; i++ )
-			{
-				var magicParticleToTrack:Particle = magicParticlesToAnimate[i];
-				
-				if (magicParticleToTrack)
-				{
-					magicParticleToTrack.scaleX -= 0.03;
-					magicParticleToTrack.scaleY = magicParticleToTrack.scaleX;
-					
-					magicParticleToTrack.y -= magicParticleToTrack.speedY;
-					magicParticleToTrack.speedY -= magicParticleToTrack.speedY * 0.2;
-					
-					magicParticleToTrack.x += magicParticleToTrack.speedX;
-					magicParticleToTrack.speedX--;
-					
-					magicParticleToTrack.rotation += deg2rad(magicParticleToTrack.spin);
-					magicParticleToTrack.spin *= 1.1;
-					
-					if (magicParticleToTrack.scaleY <= 0.02)
-					{
-						magicParticlesToAnimate.splice(i, 1);
-						this.removeChild(magicParticleToTrack);
-						magicParticleToTrack = null;
-					}
-				}
-			}
+		
+		
 		}
 		
 	}
-
-}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:ebe4ce8ab578adf12802f1c665d2f52f:80a9f770a31d8988f2b722a4c45f8649:7fbad45bb04e5beea69b8d510e2be9f3$ -->
+<TextureAtlas imagePath="magonspritesheet.png">
+    <SubTexture name="magon_1" x="0" y="0" width="26" height="48"/>
+    <SubTexture name="magon_2" x="27" y="0" width="26" height="48"/>
+</TextureAtlas>

@@ -2,6 +2,12 @@ package objects
 {
 	import starling.display.Sprite;
 	import starling.display.Image;
+	import flash.geom.Point;
+	import starling.events.Event;
+	import starling.extensions.PDParticle;
+	
+
+
 	
 	/**
 	 * ...
@@ -25,6 +31,7 @@ package objects
 			_image.x = _image.width * 0.5;
 			_image.y = _image.height * 0.5;
 			this.addChild(_image);
+			
 		}
 		
 		public function get speedX():Number 

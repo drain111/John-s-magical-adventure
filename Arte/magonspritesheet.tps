@@ -36,7 +36,7 @@
         <key>dataFormat</key>
         <string>sparrow</string>
         <key>textureFileName</key>
-        <filename>myspritesheet.png</filename>
+        <filename>../Juego/assets/graphics/magonspritesheet.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -58,13 +58,13 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>4</uint>
         <key>textureSubPath</key>
         <string></string>
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>2</uint>
+        <uint>0</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
@@ -88,9 +88,9 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
             <key>forceSquared</key>
-            <true/>
+            <false/>
             <key>forceWordAligned</key>
             <false/>
             <key>maxRects</key>
@@ -127,7 +127,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>myspritesheet.xml</filename>
+                <filename>../Juego/assets/graphics/magonspritesheet.xml</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -160,47 +160,14 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>heuristicMask</key>
             <false/>
         </struct>
         <key>fileList</key>
         <array>
-            <filename>terrain_18.png</filename>
-            <filename>terrain_1.png</filename>
-            <filename>terrain_2.png</filename>
-            <filename>terrain_3.png</filename>
-            <filename>terrain_4.png</filename>
-            <filename>terrain_5.png</filename>
-            <filename>terrain_6.png</filename>
-            <filename>terrain_7.png</filename>
-            <filename>terrain_8.png</filename>
-            <filename>terrain_9.png</filename>
-            <filename>terrain_10.png</filename>
-            <filename>terrain_11.png</filename>
-            <filename>terrain_12.png</filename>
-            <filename>terrain_13.png</filename>
-            <filename>terrain_14.png</filename>
-            <filename>terrain_15.png</filename>
-            <filename>terrain_17.png</filename>
-            <filename>terrain_16.png</filename>
-            <filename>mage_2.png</filename>
-            <filename>Mage_1.png</filename>
-            <filename>wall_1.png</filename>
-            <filename>wall_2.png</filename>
-            <filename>wall_3.png</filename>
-            <filename>wall_4.png</filename>
-            <filename>ceil_11.png</filename>
-            <filename>ceil_10.png</filename>
-            <filename>ceil_3.png</filename>
-            <filename>ceil_4.png</filename>
-            <filename>ceil_5.png</filename>
-            <filename>ceil_6.png</filename>
-            <filename>ceil_7.png</filename>
-            <filename>ceil_8.png</filename>
-            <filename>ceil_9.png</filename>
-            <filename>slime.png</filename>
-            <filename>../../Juego/assets/particles/magicparticle.png</filename>
+            <filename>Terrain tiles/magon2.png</filename>
+            <filename>Terrain tiles/Magon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
