@@ -4,7 +4,8 @@ package objects
 	import starling.display.Image;
 	import flash.geom.Point;
 	import starling.events.Event;
-	import starling.extensions.PDParticle;
+
+	
 	
 
 
@@ -20,6 +21,8 @@ package objects
 		private var _speedY:Number;
 		private var _spin:Number;
 		
+		
+		
 		private var _image:Image;
 	
 		
@@ -32,7 +35,11 @@ package objects
 			_image.y = _image.height * 0.5;
 			this.addChild(_image);
 			
+			
+			
 		}
+		
+		
 		
 		public function get speedX():Number 
 		{
@@ -63,6 +70,8 @@ package objects
 		{
 			_spin = value;
 		}
+		
+		
 		
 	}
 

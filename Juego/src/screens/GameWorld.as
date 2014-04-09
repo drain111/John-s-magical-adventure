@@ -1,5 +1,6 @@
 package screens 
 {
+	import flash.geom.Rectangle;
 	import objects.Player;
 	import flash.geom.Point;
 	import objects.Camera;
@@ -17,6 +18,7 @@ package screens
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import objects.Monster;
 
 
 	import starling.core.Starling;
@@ -48,6 +50,12 @@ package screens
 		
 		
 		private var player:Player;
+		
+		private var magicParticlesToAnimate:Vector.<Particle>
+		
+		private var slime:Monster;
+		
+
 
 
 		
@@ -60,6 +68,7 @@ package screens
 		
 		private function onAddedToStage(event:Event):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			
 			drawGame();
 		}
 		
@@ -85,13 +94,17 @@ package screens
 			reloadMaps();
 			/* todo */
 			
-			var particle:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
+			var particles:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
 			Starling.juggler.add(particle);
-			particle.x = -100;
-			particle.y = -100;
-			particle.scaleX = 1.2;
-			particle.scaleY = 1.2;
-			this.addChild(particle);
+			particles.x = -100;
+			particles.y = -100;
+			particles.scaleX = 1.2;
+			particles.scaleY = 1.2;
+			this.addChild(particles);
+			
+			
+			magicParticlesToAnimate = new Vector.<Particle>();
+			
 			
 			
 			
@@ -101,6 +114,13 @@ package screens
 			player.y = 1;
 			this.addChild(player);
 			
+			slime = new Monster();
+			slime.x = player.x + 40;
+			slime.y = player.y + 100;
+			this.addChild(slime);
+			
+			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
+
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
 		}
@@ -112,8 +132,12 @@ package screens
 			this.x = camera.posX;
 			this.y = camera.posY;
 			
-			player.x = editor.Xposition;
-			player.y = editor.Yposition; 
+			animatemagicParticles();
+			
+			 
+			
+			slime.x = player.x + 40;
+			slime.y = player.y + 100;
 		
 			/*Editado hoy*/
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
@@ -122,6 +146,8 @@ package screens
 				lastSector = actualSector;
 				reloadMaps();
 			}
+			if (slime.health <= 0) this.removeChild(slime);
+			
 			/*-----------*/
 						
 		}
@@ -253,8 +279,72 @@ package screens
 		}
 		
 		
-		
+		public function attack(e:KeyboardEvent):void
+		{
+			
+			if (e.keyCode == Keyboard.B) {
+				var localPos:Point = new Point(((player.width + player.pivotX) / 2 + 100)* player.directionx, ((player.height + player.pivotY)+100)*player.directiony);
+				createMagicParticles(localPos);
+			}
+			
 		
 		}
 		
+		public function createMagicParticles(itemToTrack:Point):void {
+			
+			var count:int = 100;
+			
+			while (count > 0)
+			{
+				count--;
+				
+				var particle:Particle = new Particle();
+				this.addChild(particle);
+				particle.x = itemToTrack.x;
+				particle.y = itemToTrack.y;
+				
+				particle.speedX = Math.random() * 2 + 1;
+				particle.speedY = Math.random() * 5;
+				particle.spin = Math.random() * 15;
+				particle.scaleX = particle.scaleY = Math.random() * 0.3 + 0.3;
+				
+				magicParticlesToAnimate.push(particle);
+			}
+		}
+		
+		private function animatemagicParticles():void {
+			for (var i:uint = 0; i < magicParticlesToAnimate.length; i++ )
+			{
+				var magicParticleToTrack:Particle = magicParticlesToAnimate[i];
+				
+				
+				if (magicParticleToTrack)
+				{
+					var rectangle:Rectangle = new Rectangle(magicParticleToTrack.x, magicParticleToTrack.y, magicParticleToTrack.width, magicParticleToTrack.height);
+					magicParticleToTrack.scaleX -= 0.01;
+					magicParticleToTrack.scaleY = magicParticleToTrack.scaleX;
+					
+					magicParticleToTrack.y = magicParticleToTrack.y;
+					rectangle.y = magicParticleToTrack.y;
+					magicParticleToTrack.speedY -= magicParticleToTrack.speedY * 0.2;
+					
+					magicParticleToTrack.x = (magicParticleToTrack.x - 10) ^ 2 ;
+					rectangle.x = magicParticleToTrack.x;
+					magicParticleToTrack.speedX--;
+					
+					magicParticleToTrack.rotation += deg2rad(magicParticleToTrack.spin);
+					magicParticleToTrack.spin *= 1.1;
+					if (rectangle.intersects(slime.bounds)) slime.health -= player.strength;
+										
+					if (magicParticleToTrack.scaleY <= 0.01)
+					{
+						magicParticlesToAnimate.splice(i, 1);
+						this.removeChild(magicParticleToTrack);
+						magicParticleToTrack = null;
+					}
+				}
+			}
+		}
+		
+	}
 	}
