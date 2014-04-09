@@ -13,12 +13,12 @@ package objects
 	public class Camera extends Sprite 
 	{
 		
-		private var _objectToFollow:Player;
+		private var _objectToFollow:Object;
 		private var _posX:int;
 		private var _posY:int;
 		
 		
-		public function Camera(object:Player) 
+		public function Camera(object:Object) 
 		{
 			super();
 			
@@ -39,12 +39,12 @@ package objects
 			}
 		}
 		
-		public function get objectToFollow():Player
+		public function get objectToFollow():Object
 		{
 			return _objectToFollow;
 		}
 		
-		public function set objectToFollow(value:Player):void 
+		public function set objectToFollow(value:Object):void 
 		{
 			_objectToFollow = value;
 		}

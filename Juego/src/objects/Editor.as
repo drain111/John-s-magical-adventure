@@ -150,13 +150,13 @@ package objects
 		private function changeImage():void {
 			if (this._tileSelected != 0) 
 			{
-				this._image.texture = Assets.getAtlas().getTexture("terrain_" + _tileSelected);
+				this._image = Image(Assets.getAtlas().getTexture("terrain_" + _tileSelected));
 				this._lastTileSelected = this._tileSelected;
 			}
 			else 
 			{
 				this._tileSelected = this._lastTileSelected;
-				this._image.texture = Assets.getAtlas().getTexture("terrain_" + _tileSelected);
+				this._image = Image(Assets.getAtlas().getTexture("terrain_" + _tileSelected));
 			}
 			
 		}

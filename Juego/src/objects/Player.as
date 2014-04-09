@@ -18,34 +18,23 @@ package objects
 	 */
 	public class Player extends Sprite 
 	{
-		private var healt:int;
+		private var health:int;
 		private var magic:Vector.<int>;
 		private var _directionx:int;
 		private var _directiony:int;
 		private var _heroArt:MovieClip;
 		private var _strength:int;
+		private var posx:int;
+		private var posy:int;
 		private var aux:int;
+		private var actualimage:int;
 		
 
 		
-		public function Player() 
+		public function Player(point:Point) 
 		{
 			super();
-			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
-		}
-		private function onAddedToStage(event:Event):void
-		{
-			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			
-			createHeroArt();
-		}
-		
-		private function createHeroArt():void
-		{
-			heroArt = new MovieClip(Assets.getAtlas().getTextures("mage_" ), 20);
-			heroArt.x = Math.ceil(-heroArt.width/2);
-			heroArt.y = Math.ceil(-heroArt.height/2);
-			//starling.core.Starling.juggler.add(heroArt);
+			health = 100;
 			directionx = 1;
 			directiony = -1;
 			magic = new Vector.<int>;
@@ -53,13 +42,40 @@ package objects
 			magic.push(1);
 			magic.push(0);
 			strength = 10;
+			actualimage = 2;
+			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		private function onAddedToStage(event:Event):void
+		{
+			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			createHeroArt();
+		}
+		
+		private function createHeroArt():void
+		{
+			heroArt = new MovieClip(Assets.getAtlas().getTextures("mage_2" ),1);
+			heroArt.x = Math.ceil(-heroArt.width/2);
+			heroArt.y = Math.ceil(-heroArt.height/2);
+			starling.core.Starling.juggler.add(heroArt);
+			
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, changeside);
-			
+			this.addEventListener(Event.ENTER_FRAME, update);
+			//this.addEventListener(Event.ENTER_FRAME, remove);
 			this.addChild(heroArt);
 			
 			
 			
+		}
+		
+		public function remove(e:Event):void 
+		{
+			this.removeChild(heroArt);
+		}
+		
+		private function update(e:Event):void 
+		{
+			heroArt = new MovieClip(Assets.getAtlas().getTextures("mage_" + actualimage ),1);
 		}
 		public function changeside(e:KeyboardEvent):void
 		{
@@ -67,30 +83,20 @@ package objects
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("mage_2");
 				directiony = 1;
-				aux = this.y;
-				for (var i:int = this.y; i < aux + 30; i++) 
-				{
-					this.y++;
-					
-				}
+				actualimage = 2;
+				this.y -= 30;
+		
 			}
 			else{
 			if (e.keyCode == Keyboard.M) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("mage_1");
 				directiony = -1;
-				aux = this.y;
-				for (var i:int = this.y; i > aux - 30;i-- ) {
-					this.y -= 1;
-					
-				}
+				actualimage = 1;
+				this.y += 30;
 				
 			}
-			
 			}
-		}
-		public function move():void {
-			this.y -= 1;
 		}
 		public function get directionx():int 
 		{

@@ -19,10 +19,6 @@ package screens
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import objects.Monster;
-	import com.greensock.*;
-	import com.greensock.easing.*;
-	import com.greensock.plugins.*;
-	import com.greensock.motionPaths.*;
 
 	
 	
@@ -62,7 +58,7 @@ package screens
 		
 		private var slime:Monster;
 		
-		
+		private var iss:Boolean;
 
 
 
@@ -98,7 +94,7 @@ package screens
 			this.addChild(editor);
 			createFrontgroundMap(frontgroundMap, XSectors, YSectors, editor);
 			
-			reloadMaps();
+			
 			/* todo */
 			
 			var particles:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
@@ -113,25 +109,22 @@ package screens
 			magicParticlesToAnimate = new Vector.<Particle>();
 			
 			
-			
+			iss = true;
 			
 			/* player  */
-			player = new Player();
-			player.x = 1;
-			player.y = 1;
+			var point:Point = new Point(0,0)
+			player = new Player(point);
 			this.addChild(player);
 			this.camera = new Camera(player);
 			this.addChild(camera);
 			slime = new Monster();
-			slime.x = player.x + 40;
-			slime.y = player.y + 100;
 			this.addChild(slime);
 			
 			
 			//circle
 			
 			
-		
+			reloadMaps();
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
 
@@ -143,6 +136,14 @@ package screens
 		
 		private function update(e:Event):void 
 		{
+			
+			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
+			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
+				lastSector = actualSector;
+				reloadMaps();
+				
+			}
+			
 			this.x = camera.posX;
 			this.y = camera.posY;
 			
@@ -154,13 +155,8 @@ package screens
 			slime.y = player.y + 100;
 		
 			/*Editado hoy*/
-			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
 			
-			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
-				lastSector = actualSector;
-				reloadMaps();
-				
-			}
+			
 			if (slime.health <= 0) this.removeChild(slime);
 			
 			/*-----------*/
@@ -175,8 +171,10 @@ package screens
 				removeBackground();
 				removeFrontground();
 				this.removeChild(editor);
-				//this.removeChild(player);
+				this.removeChild(player);
+				//this.removeChild(slime);
 				//this.removeChild(camera);
+				iss = false;
 			}
 			
 			var sectors:Vector.<int> = new Vector.<int>;
@@ -203,11 +201,14 @@ package screens
 			{
 				this.addChild(loadedFrontgroundMaps[k]);
 			}
-
+			if (!iss) {
+			this.addChild(player);
 			this.addChild(editor);
-			//this.addChild(player);
+	
+
+			//this.addChild(slime);
 			//this.addChild(camera);
-			
+			}
 		}
 		
 		public function removeFrontground():void {
