@@ -19,6 +19,13 @@ package screens
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import objects.Monster;
+	import com.greensock.*;
+	import com.greensock.easing.*;
+	import com.greensock.plugins.*;
+	import com.greensock.motionPaths.*;
+
+	
+	
 
 
 	import starling.core.Starling;
@@ -55,6 +62,7 @@ package screens
 		
 		private var slime:Monster;
 		
+		
 
 
 
@@ -89,8 +97,7 @@ package screens
 			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
 			createFrontgroundMap(frontgroundMap, XSectors, YSectors, editor);
-			this.camera = new Camera(this.editor.image);
-			this.addChild(camera);
+			
 			reloadMaps();
 			/* todo */
 			
@@ -113,11 +120,18 @@ package screens
 			player.x = 1;
 			player.y = 1;
 			this.addChild(player);
-			
+			this.camera = new Camera(player);
+			this.addChild(camera);
 			slime = new Monster();
 			slime.x = player.x + 40;
 			slime.y = player.y + 100;
 			this.addChild(slime);
+			
+			
+			//circle
+			
+			
+		
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
 
@@ -134,7 +148,7 @@ package screens
 			
 			animatemagicParticles();
 			
-			 
+			
 			
 			slime.x = player.x + 40;
 			slime.y = player.y + 100;
@@ -145,6 +159,7 @@ package screens
 			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
 				lastSector = actualSector;
 				reloadMaps();
+				
 			}
 			if (slime.health <= 0) this.removeChild(slime);
 			
@@ -283,7 +298,7 @@ package screens
 		{
 			
 			if (e.keyCode == Keyboard.B) {
-				var localPos:Point = new Point(((player.width + player.pivotX) / 2 + 100)* player.directionx, ((player.height + player.pivotY)+100)*player.directiony);
+				var localPos:Point = new Point(((player.x + (player.x-player.width) ) / 2 + 100)* player.directionx, ((player.y + (player.y - player.height) )+100)*player.directiony);
 				createMagicParticles(localPos);
 			}
 			
@@ -292,21 +307,22 @@ package screens
 		
 		public function createMagicParticles(itemToTrack:Point):void {
 			
-			var count:int = 100;
-			
+			var count:int = 200;
+			var x:int = 0;
 			while (count > 0)
 			{
 				count--;
 				
 				var particle:Particle = new Particle();
 				this.addChild(particle);
-				particle.x = itemToTrack.x;
-				particle.y = itemToTrack.y;
+				
+				particle.x = player.x + 50*Math.cos(x);
+				particle.y = player.y + 50*Math.sin(x++);
 				
 				particle.speedX = Math.random() * 2 + 1;
 				particle.speedY = Math.random() * 5;
 				particle.spin = Math.random() * 15;
-				particle.scaleX = particle.scaleY = Math.random() * 0.3 + 0.3;
+				particle.scaleX = particle.scaleY = Math.random() * 0.5 + 0.3;
 				
 				magicParticlesToAnimate.push(particle);
 			}
@@ -320,15 +336,20 @@ package screens
 				
 				if (magicParticleToTrack)
 				{
+
+				
+					
 					var rectangle:Rectangle = new Rectangle(magicParticleToTrack.x, magicParticleToTrack.y, magicParticleToTrack.width, magicParticleToTrack.height);
 					magicParticleToTrack.scaleX -= 0.01;
 					magicParticleToTrack.scaleY = magicParticleToTrack.scaleX;
 					
-					magicParticleToTrack.y = magicParticleToTrack.y;
+					
+					
+					//magicParticleToTrack.y = (magicParticleToTrack.y - 10) ^2;
 					rectangle.y = magicParticleToTrack.y;
 					magicParticleToTrack.speedY -= magicParticleToTrack.speedY * 0.2;
 					
-					magicParticleToTrack.x = (magicParticleToTrack.x - 10) ^ 2 ;
+					//magicParticleToTrack.x = (magicParticleToTrack.x - 10) ^ 2;
 					rectangle.x = magicParticleToTrack.x;
 					magicParticleToTrack.speedX--;
 					

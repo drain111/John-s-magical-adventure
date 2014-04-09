@@ -9,6 +9,7 @@ package objects
 	import screens.GameWorld;
 	import starling.core.Starling;
 	import starling.display.MovieClip;
+	import starling.animation.DelayedCall;
 
 	
 	/**
@@ -21,7 +22,7 @@ package objects
 		private var magic:Vector.<int>;
 		private var _directionx:int;
 		private var _directiony:int;
-		private var heroArt:MovieClip;
+		private var _heroArt:MovieClip;
 		private var _strength:int;
 		private var aux:int;
 		
@@ -67,9 +68,10 @@ package objects
 				heroArt.texture = Assets.getAtlas().getTexture("mage_2");
 				directiony = 1;
 				aux = this.y;
-				while (aux < this.y + 30){
-					this.y += 1;
-					aux++;
+				for (var i:int = this.y; i < aux + 30; i++) 
+				{
+					this.y++;
+					
 				}
 			}
 			else{
@@ -78,15 +80,18 @@ package objects
 				heroArt.texture = Assets.getAtlas().getTexture("mage_1");
 				directiony = -1;
 				aux = this.y;
-				while (aux > this.y - 30){
+				for (var i:int = this.y; i > aux - 30;i-- ) {
 					this.y -= 1;
-					aux--;
+					
 				}
+				
 			}
 			
 			}
 		}
-		
+		public function move():void {
+			this.y -= 1;
+		}
 		public function get directionx():int 
 		{
 			return _directionx;
@@ -115,6 +120,16 @@ package objects
 		public function set strength(value:int):void 
 		{
 			_strength = value;
+		}
+		
+		public function get heroArt():MovieClip 
+		{
+			return _heroArt;
+		}
+		
+		public function set heroArt(value:MovieClip):void 
+		{
+			_heroArt = value;
 		}
 		
 		
