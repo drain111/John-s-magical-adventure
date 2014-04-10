@@ -61,27 +61,23 @@ package objects
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, changeside);
 			this.addEventListener(Event.ENTER_FRAME, update);
-			//this.addEventListener(Event.ENTER_FRAME, remove);
 			this.addChild(heroArt);
 			
 			
 			
 		}
 		
-		public function remove(e:Event):void 
-		{
-			this.removeChild(heroArt);
-		}
+		
 		
 		private function update(e:Event):void 
 		{
-			heroArt = new MovieClip(Assets.getAtlas().getTextures("mage_" + actualimage ),1);
+			
 		}
 		public function changeside(e:KeyboardEvent):void
 		{
 			if (e.keyCode == Keyboard.N) 
 			{
-				heroArt.texture = Assets.getAtlas().getTexture("mage_2");
+				heroArt.texture = Assets.getAtlas().getTexture("mage_1");
 				directiony = 1;
 				actualimage = 2;
 				this.y -= 30;
@@ -90,7 +86,7 @@ package objects
 			else{
 			if (e.keyCode == Keyboard.M) 
 			{
-				heroArt.texture = Assets.getAtlas().getTexture("mage_1");
+				heroArt.texture = Assets.getAtlas().getTexture("mage_2");
 				directiony = -1;
 				actualimage = 1;
 				this.y += 30;

@@ -137,12 +137,7 @@ package screens
 		private function update(e:Event):void 
 		{
 			
-			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
-			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
-				lastSector = actualSector;
-				reloadMaps();
-				
-			}
+			
 			
 			this.x = camera.posX;
 			this.y = camera.posY;
@@ -155,7 +150,12 @@ package screens
 			slime.y = player.y + 100;
 		
 			/*Editado hoy*/
-			
+			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
+			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
+				lastSector = actualSector;
+				reloadMaps();
+				
+			}
 			
 			if (slime.health <= 0) this.removeChild(slime);
 			
@@ -172,9 +172,8 @@ package screens
 				removeFrontground();
 				this.removeChild(editor);
 				this.removeChild(player);
-				//this.removeChild(slime);
-				//this.removeChild(camera);
-				iss = false;
+				this.removeChild(slime);
+				this.removeChild(camera);
 			}
 			
 			var sectors:Vector.<int> = new Vector.<int>;
@@ -201,14 +200,13 @@ package screens
 			{
 				this.addChild(loadedFrontgroundMaps[k]);
 			}
-			if (!iss) {
-			this.addChild(player);
-			this.addChild(editor);
-	
 
-			//this.addChild(slime);
-			//this.addChild(camera);
-			}
+			
+			this.addChild(editor);
+			this.addChild(player);
+
+			this.addChild(slime);
+			this.addChild(camera);
 		}
 		
 		public function removeFrontground():void {
