@@ -13,7 +13,7 @@ package objects
 	{
 		private var _health:int;
 		private var _monsterArt:Image;
-		private var _alreadyhit:int;
+		private var _alreadyhit:Boolean;
 		
 		public function Monster() 
 		{

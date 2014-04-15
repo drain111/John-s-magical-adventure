@@ -125,7 +125,7 @@ package objects
 		public function pushtheactualspell():void
 		{
 				var aux:int = 0;
-				aux = magic.pop();
+				aux = _magic.pop();
 				_magic.unshift(aux);
 			
 		}
