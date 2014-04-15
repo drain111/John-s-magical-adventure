@@ -6,7 +6,7 @@ package screens
 	import objects.Camera;
 	import objects.Editor;
 	import objects.GameBackground;
-	import objects.GameFrontground;
+	import objects.GameForeground;
 	import objects.Particle;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -34,10 +34,10 @@ package screens
 	public class GameWorld extends Sprite 
 	{
 		private var backgroundMap:Vector.<GameBackground>;
-		private var frontgroundMap:Vector.<GameFrontground>;
+		private var frontgroundMap:Vector.<GameForeground>;
 		/*Editado hoy*/
 		private var loadedBackgroundMaps:Vector.<GameBackground>;
-		private var loadedFrontgroundMaps:Vector.<GameFrontground>;
+		private var loadedFrontgroundMaps:Vector.<GameForeground>;
 		/*-----------*/
 		private var XSectors:int = 30;
 		private var YSectors:int = 30;
@@ -79,11 +79,11 @@ package screens
 		
 		private function drawGame():void {
 			backgroundMap = new Vector.<GameBackground>;
-			frontgroundMap = new Vector.<GameFrontground>;
+			frontgroundMap = new Vector.<GameForeground>;
 			
 			/*Editado hoy*/
 			loadedBackgroundMaps = new Vector.<GameBackground>;
-			loadedFrontgroundMaps = new Vector.<GameFrontground>;
+			loadedFrontgroundMaps = new Vector.<GameForeground>;
 			/*-----------*/
 			
 			editor = new Editor( 500 / 36 + 1, 500 / 36 + 1, XSectors, YSectors);
@@ -271,7 +271,7 @@ package screens
 			}
 		}
 		
-		public function createFrontgroundMap(map:Vector.<GameFrontground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
+		public function createFrontgroundMap(map:Vector.<GameForeground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
 			
 			var cont:int = 0;
 			var contX:int = 0;
@@ -282,7 +282,7 @@ package screens
 				
 				while (contY < numberYSectors) 
 				{
-					map.push(new GameFrontground(contX, contY, editor));
+					map.push(new GameForeground(contX, contY, editor));
 					//this.addChild(map[cont]);
 					contY++;
 					cont++;

@@ -100,6 +100,15 @@ package objects
 				this.x -= 30;
 				
 			}
+			else{
+			if (e.keyCode == Keyboard.C) 
+			{
+				heroArt.texture = Assets.getAtlas().getTexture("Mage_4");
+				directionx = -1;
+				this.x += 30;
+				
+			}
+			}
 			}
 			}
 		}
