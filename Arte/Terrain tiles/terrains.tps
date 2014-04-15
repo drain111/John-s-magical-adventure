@@ -201,6 +201,8 @@
             <filename>ceil_9.png</filename>
             <filename>slime.png</filename>
             <filename>../../Juego/assets/particles/magicparticle.png</filename>
+            <filename>Mage_4.png</filename>
+            <filename>Mage_3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

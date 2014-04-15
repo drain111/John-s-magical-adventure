@@ -31,7 +31,7 @@ package objects
 		
 
 		
-		public function Player(point:Point) 
+		public function Player() 
 		{
 			super();
 			health = 100;
@@ -53,7 +53,7 @@ package objects
 		
 		private function createHeroArt():void
 		{
-			heroArt = new MovieClip(Assets.getAtlas().getTextures("mage_2" ),1);
+			heroArt = new MovieClip(Assets.getAtlas().getTextures("Mage_2" ),1);
 			heroArt.x = Math.ceil(-heroArt.width/2);
 			heroArt.y = Math.ceil(-heroArt.height/2);
 			starling.core.Starling.juggler.add(heroArt);
@@ -77,7 +77,7 @@ package objects
 		{
 			if (e.keyCode == Keyboard.N) 
 			{
-				heroArt.texture = Assets.getAtlas().getTexture("mage_1");
+				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
 				directiony = 1;
 				actualimage = 2;
 				this.y -= 30;
@@ -86,11 +86,21 @@ package objects
 			else{
 			if (e.keyCode == Keyboard.M) 
 			{
-				heroArt.texture = Assets.getAtlas().getTexture("mage_2");
+				heroArt.texture = Assets.getAtlas().getTexture("Mage_2");
 				directiony = -1;
 				actualimage = 1;
 				this.y += 30;
 				
+			}
+			else{
+			if (e.keyCode == Keyboard.B) 
+			{
+				heroArt.texture = Assets.getAtlas().getTexture("Mage_3");
+				directionx = -1;
+				actualimage = 1;
+				this.y += 30;
+				
+			}
 			}
 			}
 		}

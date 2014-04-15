@@ -112,8 +112,7 @@ package screens
 			iss = true;
 			
 			/* player  */
-			var point:Point = new Point(0,0)
-			player = new Player(point);
+			player = new Player();
 			this.addChild(player);
 			this.camera = new Camera(player);
 			this.addChild(camera);
@@ -173,7 +172,7 @@ package screens
 				this.removeChild(editor);
 				this.removeChild(player);
 				this.removeChild(slime);
-				this.removeChild(camera);
+				//this.removeChild(camera);
 			}
 			
 			var sectors:Vector.<int> = new Vector.<int>;
@@ -206,7 +205,7 @@ package screens
 			this.addChild(player);
 
 			this.addChild(slime);
-			this.addChild(camera);
+			//this.addChild(camera);
 		}
 		
 		public function removeFrontground():void {
