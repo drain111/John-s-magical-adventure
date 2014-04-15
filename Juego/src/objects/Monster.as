@@ -13,7 +13,7 @@ package objects
 	{
 		private var _health:int;
 		private var MonsterArt:Image;
-		private var _alreadyhit:int;
+		private var _alreadyhit:Boolean;
 		
 		public function Monster() 
 		{
@@ -34,7 +34,7 @@ package objects
 			MonsterArt.x = Math.ceil(-MonsterArt.width/2);
 			MonsterArt.y = Math.ceil( -MonsterArt.height / 2);
 			health = 100;
-			alreadyhit = 0;
+			alreadyhit = false;
 			//starling.core.Starling.juggler.add(heroArt);
 			/*directionx = 1;
 			directiony = -1;
@@ -60,12 +60,12 @@ package objects
 			_health = value;
 		}
 		
-		public function get alreadyhit():int 
+		public function get alreadyhit():Boolean 
 		{
 			return _alreadyhit;
 		}
 		
-		public function set alreadyhit(value:int):void 
+		public function set alreadyhit(value:Boolean):void 
 		{
 			_alreadyhit = value;
 		}

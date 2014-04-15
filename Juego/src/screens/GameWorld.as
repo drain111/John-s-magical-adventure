@@ -19,6 +19,7 @@ package screens
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import objects.Monster;
+	import starling.display.Image;
 
 	
 	
@@ -33,6 +34,7 @@ package screens
 	 */
 	public class GameWorld extends Sprite 
 	{
+		public var attacking:Boolean;
 		private var backgroundMap:Vector.<GameBackground>;
 		private var frontgroundMap:Vector.<GameFrontground>;
 		/*Editado hoy*/
@@ -60,7 +62,10 @@ package screens
 		
 		private var iss:Boolean;
 
-
+		private var isRight:Boolean = false;
+        private var isLeft:Boolean = false;
+        private var isUp:Boolean = false;
+        private var isDown:Boolean = false;
 
 		
 		public function GameWorld() 
@@ -126,9 +131,46 @@ package screens
 			reloadMaps();
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
+			this.addEventListener(KeyboardEvent.KEY_UP, release);
 
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
+		}
+		
+		private function release(e:KeyboardEvent):void 
+		{
+			if (e.keyCode == Keyboard.B)
+			{
+				var localPos:Point = new Point(((player.x + (player.x-player.width) ) / 2 + 100)* player.directionx, ((player.y + (player.y - player.height) )+100)*player.directiony);
+				createMagicParticles(localPos);
+			}
+			if (e.keyCode == Keyboard.X)
+			{
+				player.pushtheactualspell();
+				
+			}
+			if (e.keyCode == Keyboard.N ) 
+			{
+				isUp = false;
+			}
+			else{
+			if (e.keyCode == Keyboard.M) 
+			{
+				isDown = false;
+			}
+			else{
+			if (e.keyCode == Keyboard.V) 
+			{
+				isLeft = false;
+			}
+			else{
+			if (e.keyCode == Keyboard.C) 
+			{
+				isRight = false;
+			}
+			}
+			}
+			}
 		}
 		
 	
@@ -143,7 +185,13 @@ package screens
 			
 			animatemagicParticles();
 			
-			
+			if (isUp) player.y -= 5;
+			else if(isDown) player.y += 5;
+			else if(isLeft) player.x -= 5;
+			else if (isRight) player.x += 5;
+			if (attacking) {
+				
+			}
 			
 			slime.x = player.x + 40;
 			slime.y = player.y + 100;
@@ -295,9 +343,34 @@ package screens
 		public function attack(e:KeyboardEvent):void
 		{
 			
-			if (e.keyCode == Keyboard.B) {
-				var localPos:Point = new Point(((player.x + (player.x-player.width) ) / 2 + 100)* player.directionx, ((player.y + (player.y - player.height) )+100)*player.directiony);
-				createMagicParticles(localPos);
+			
+			
+			
+			
+			
+			//PRUEBAS
+			
+			if (e.keyCode == Keyboard.N ) 
+			{
+				isUp = true;
+			}
+			else{
+			if (e.keyCode == Keyboard.M) 
+			{
+				isDown = true;
+			}
+			else{
+			if (e.keyCode == Keyboard.V) 
+			{
+				isLeft = true;
+			}
+			else{
+			if (e.keyCode == Keyboard.C) 
+			{
+				isRight = true;
+			}
+			}
+			}
 			}
 			
 		
@@ -312,10 +385,19 @@ package screens
 				count--;
 				
 				var particle:Particle = new Particle();
+				if(player.obtainactualspell() != 2)
+				particle.image.texture = Assets.getAtlas().getTexture("magicparticle" + player.obtainactualspell());
+				particle.x = player.x;
+				particle.y = player.y;
 				this.addChild(particle);
-				
+				if(player.obtainactualspell() == 0) {
 				particle.x = player.x + 50*Math.cos(x);
-				particle.y = player.y + 50*Math.sin(x++);
+				particle.y = player.y + 50 * Math.sin(x++);
+				}
+				else if (player.obtainactualspell() == 1) {
+					particle.x += x * player.directionx;
+					particle.y += x++ * player.directiony;
+				}
 				
 				particle.speedX = Math.random() * 2 + 1;
 				particle.speedY = Math.random() * 5;
@@ -353,7 +435,12 @@ package screens
 					
 					magicParticleToTrack.rotation += deg2rad(magicParticleToTrack.spin);
 					magicParticleToTrack.spin *= 1.1;
-					if (rectangle.intersects(slime.bounds)) slime.health -= player.strength;
+					if (rectangle.intersects(slime.bounds) && slime.alreadyhit == false) //PQ no funciona esto??? 
+					{
+						slime.health -= player.strength;
+						slime.alreadyhit = true;
+					
+					}
 										
 					if (magicParticleToTrack.scaleY <= 0.01)
 					{
@@ -362,7 +449,10 @@ package screens
 						magicParticleToTrack = null;
 					}
 				}
+				
 			}
+			slime.alreadyhit = false;
+			
 		}
 		
 	}

@@ -26,7 +26,6 @@ package objects
 		private var _strength:int;
 		private var posx:int;
 		private var posy:int;
-		private var aux:int;
 		private var actualimage:int;
 		
 
@@ -35,8 +34,8 @@ package objects
 		{
 			super();
 			health = 100;
-			directionx = 1;
-			directiony = -1;
+			directionx = 0;
+			directiony = 1;
 			magic = new Vector.<int>;
 			magic.push(2);
 			magic.push(1);
@@ -75,21 +74,21 @@ package objects
 		}
 		public function changeside(e:KeyboardEvent):void
 		{
-			if (e.keyCode == Keyboard.N) 
+			if (e.keyCode == Keyboard.N ) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
-				directiony = 1;
+				directiony = -1;
+				directionx = 0;
 
-				this.y -= 30;
+
 		
 			}
 			else{
 			if (e.keyCode == Keyboard.M) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_2");
-				directiony = -1;
-
-				this.y += 30;
+				directiony = 1;
+				directionx = 0;
 				
 			}
 			else{
@@ -97,11 +96,34 @@ package objects
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_3");
 				directionx = -1;
-				this.x -= 30;
+				directiony = 0;
+
+				
+			}
+			else{
+			if (e.keyCode == Keyboard.C) 
+			{
+				heroArt.texture = Assets.getAtlas().getTexture("Mage_4");
+				directionx = 1;
+				directiony = 0;
+				
 				
 			}
 			}
 			}
+			}
+			
+		}
+		public function  obtainactualspell():int
+		{
+			return magic[0];
+		}
+		public function pushtheactualspell():void
+		{
+				var aux:int = 0;
+				aux = magic.pop();
+				magic.unshift(aux);
+			
 		}
 		public function get directionx():int 
 		{

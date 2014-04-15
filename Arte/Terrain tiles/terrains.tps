@@ -184,7 +184,6 @@
             <filename>terrain_15.png</filename>
             <filename>terrain_17.png</filename>
             <filename>terrain_16.png</filename>
-            <filename>mage_2.png</filename>
             <filename>Mage_1.png</filename>
             <filename>wall_1.png</filename>
             <filename>wall_2.png</filename>
@@ -203,6 +202,14 @@
             <filename>../../Juego/assets/particles/magicparticle.png</filename>
             <filename>Mage_4.png</filename>
             <filename>Mage_3.png</filename>
+            <filename>Mage_2.png</filename>
+            <filename>Objectsandwalls_6.png</filename>
+            <filename>Objectsandwalls_1.png</filename>
+            <filename>Objectsandwalls_2.png</filename>
+            <filename>Objectsandwalls_3.png</filename>
+            <filename>Objectsandwalls_4.png</filename>
+            <filename>Objectsandwalls_5.png</filename>
+            <filename>../../Juego/assets/particles/magicparticle2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

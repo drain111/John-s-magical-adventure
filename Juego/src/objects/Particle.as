@@ -30,7 +30,7 @@ package objects
 		{
 			super();
 			
-			_image = new Image(Assets.getAtlas().getTexture("magicparticle"));
+			_image = new Image(Assets.getAtlas().getTexture("magicparticle1"));
 			_image.x = _image.width * 0.5;
 			_image.y = _image.height * 0.5;
 			this.addChild(_image);
@@ -69,6 +69,16 @@ package objects
 		public function set spin(value:Number):void 
 		{
 			_spin = value;
+		}
+		
+		public function get image():Image 
+		{
+			return _image;
+		}
+		
+		public function set image(value:Image):void 
+		{
+			_image = value;
 		}
 		
 		
