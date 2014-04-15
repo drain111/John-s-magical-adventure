@@ -18,30 +18,34 @@ package objects
 	 */
 	public class Player extends Sprite 
 	{
-		private var health:int;
-		private var magic:Vector.<int>;
+		private var _health:int;
+		private var _magic:Vector.<int>;
 		private var _directionx:int;
 		private var _directiony:int;
 		private var _heroArt:MovieClip;
 		private var _strength:int;
-		private var posx:int;
-		private var posy:int;
-		private var actualimage:int;
+        
 		
+		private var _posx:int;
+		private var _posy:int;
+		private var _actualimage:int;
 
 		
 		public function Player() 
 		{
 			super();
-			health = 100;
-			directionx = 0;
-			directiony = 1;
-			magic = new Vector.<int>;
-			magic.push(2);
-			magic.push(1);
-			magic.push(0);
-			strength = 10;
-			actualimage = 2;
+
+			
+			_health = 100;
+			_directionx = 1;
+			_directiony = -1;
+			_magic = new Vector.<int>;
+			_magic.push(2);
+			_magic.push(1);
+			_magic.push(0);
+			
+			_strength = 10;
+			_actualimage = 2;
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		private function onAddedToStage(event:Event):void
@@ -77,8 +81,8 @@ package objects
 			if (e.keyCode == Keyboard.N ) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
-				directiony = -1;
-				directionx = 0;
+				_directiony = -1;
+				_directionx = 0;
 
 
 		
@@ -87,8 +91,8 @@ package objects
 			if (e.keyCode == Keyboard.M) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_2");
-				directiony = 1;
-				directionx = 0;
+				_directiony = 1;
+				_directionx = 0;
 				
 			}
 			else{
@@ -104,9 +108,9 @@ package objects
 			if (e.keyCode == Keyboard.C) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_4");
-				directionx = 1;
-				directiony = 0;
-				
+
+				_directionx = 1;
+				_directiony = 0;
 				
 			}
 			}
@@ -116,13 +120,13 @@ package objects
 		}
 		public function  obtainactualspell():int
 		{
-			return magic[0];
+			return _magic[0];
 		}
 		public function pushtheactualspell():void
 		{
 				var aux:int = 0;
 				aux = magic.pop();
-				magic.unshift(aux);
+				_magic.unshift(aux);
 			
 		}
 		public function get directionx():int 

@@ -77,12 +77,12 @@ package objects
 			this._image.width = _editorDim;
 			this.addChild(_image);
 			
-			this.addEventListener(Event.ENTER_FRAME, refresh);
+			this.addEventListener(Event.ENTER_FRAME, update);
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, moveEditor);
 		}
 		
-		private function refresh():void {
+		private function update():void {
 			this._image.x = _realXpos;
 			this._image.y = _realYpos;
 			
