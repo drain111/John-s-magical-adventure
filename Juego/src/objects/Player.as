@@ -79,7 +79,7 @@ package objects
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
 				directiony = 1;
-				actualimage = 2;
+
 				this.y -= 30;
 		
 			}
@@ -88,17 +88,16 @@ package objects
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_2");
 				directiony = -1;
-				actualimage = 1;
+
 				this.y += 30;
 				
 			}
 			else{
-			if (e.keyCode == Keyboard.B) 
+			if (e.keyCode == Keyboard.V) 
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_3");
 				directionx = -1;
-				actualimage = 1;
-				this.y += 30;
+				this.x -= 30;
 				
 			}
 			}
