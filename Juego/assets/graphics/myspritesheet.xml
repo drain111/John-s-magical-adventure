@@ -14,7 +14,7 @@
     <SubTexture name="ceil_7" x="64" y="67" width="30" height="30"/>
     <SubTexture name="ceil_8" x="95" y="67" width="30" height="30"/>
     <SubTexture name="ceil_9" x="126" y="67" width="30" height="30"/>
-    <SubTexture name="mage_2" x="157" y="67" width="32" height="64"/>
+    <SubTexture name="Mage_2" x="157" y="67" width="32" height="64"/>
     <SubTexture name="magicparticle" x="190" y="67" width="32" height="32"/>
     <SubTexture name="slime" x="2" y="132" width="32" height="32"/>
     <SubTexture name="terrain_1" x="35" y="132" width="30" height="30"/>
