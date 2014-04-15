@@ -10,8 +10,8 @@ package objects
 	 */
 	public class BgLayer extends Sprite 
 	{	
-		private var matrix:Array;
-		private var tiles:Array;
+		private var _matrix:Array;
+		private var _tiles:Array;
 		
 		private var _sectorX:int;
 		private var _sectorY:int;
@@ -30,8 +30,8 @@ package objects
 		public function BgLayer(type:String, sectorX:int, sectorY:int, layer:int, rows:int, columns:int, tileDimension:int, map:Array, editor:Editor, editable:Boolean = false) 
 		{
 			super();
-			this.matrix = new Array();
-			this.tiles = new Array();
+			this._matrix = new Array();
+			this._tiles = new Array();
 			
 			this._sectorX = sectorX;
 			this._sectorY = sectorY;
@@ -47,7 +47,7 @@ package objects
 			this._dim = tileDimension;
 			this._layer = layer;
 			
-			this.matrix = map;
+			this._matrix = map;
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -60,9 +60,9 @@ package objects
 			var actualRow:int = 0;
 			var actualColumn:int = 0;
 			
-			while (cont < matrix.length) 
+			while (cont < _matrix.length) 
 			{
-				var i:int = matrix[cont];
+				var i:int = _matrix[cont];
 				
 				drawTile(i, cont, actualRow, actualColumn, _dim);
 				
@@ -85,21 +85,21 @@ package objects
 		private function drawTile(numTile:int, index:int, row:int, column:int, dim:int):void {
 			if (numTile != 0) 
 			{
-				this.tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + numTile));
+				this._tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + numTile));
 			}
 			else 
 			{
-				this.tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + 1));
-				this.tiles[index].visible = false;
+				this._tiles[index] = new Image(Assets.getAtlas().getTexture(this._type + 1));
+				this._tiles[index].visible = false;
 			}
 			
-			this.tiles[index].x =(_sectorX * (_numColumns * (_dim))) + column * _dim;
-			this.tiles[index].y =(_sectorY * (_numRows * (_dim))) + row * _dim;
+			this._tiles[index].x =(_sectorX * (_numColumns * (_dim))) + column * _dim;
+			this._tiles[index].y =(_sectorY * (_numRows * (_dim))) + row * _dim;
 			
-			this.tiles[index].width = _dim + 1;
-			this.tiles[index].height = _dim + 1;
+			this._tiles[index].width = _dim + 1;
+			this._tiles[index].height = _dim + 1;
 			
-			this.addChild(tiles[index]);
+			this.addChild(_tiles[index]);
 			
 		}
 		
@@ -107,16 +107,16 @@ package objects
 			if (this._editor != null && this._editor.actualXSector == this._sectorX && this._editor.actualYSector == this._sectorY && this._editor.changeMapTile ) 
 			{
 				var index:int = (this._editor.sectorYPos * this._numColumns) + this._editor.sectorXPos;
-				this.matrix[index] = this._editor.tileToChange;
+				this._matrix[index] = this._editor.tileToChange;
 				if (this._editor.tileToChange != 0) 
 				{
-					this.tiles[index].visible = true;
-					this.tiles[index].texture = Assets.getAtlas().getTexture(this._type + this.matrix[index]);
+					this._tiles[index].visible = true;
+					this._tiles[index].texture = Assets.getAtlas().getTexture(this._type + this._matrix[index]);
 				}
 				else 
 				{
-					this.tiles[index].visible = false;
-					this.tiles[index].texture = Assets.getAtlas().getTexture(this._type + 1);
+					this._tiles[index].visible = false;
+					this._tiles[index].texture = Assets.getAtlas().getTexture(this._type + 1);
 				}
 				this._editor.changeMapTile = false;
 			}
@@ -126,25 +126,25 @@ package objects
 		private function sendTrace():void {
 			if (this._editor.sendTrace) 
 			{
-				trace("Layer " + this._layer + ": " + this.matrix);
+				trace("Layer " + this._layer + ": " + this._matrix);
 				var index:int = (this._editor.Yposition * this._numColumns) / (this._sectorY + 1) + this._editor.Xposition / (this._sectorX + 1);
 				trace();
 				this._editor.sendTrace = false;
 			}
 		}
 		private function loadLayer():void {
-			for (var i:int = 0; i < matrix.length; i++) 
+			for (var i:int = 0; i < _matrix.length; i++) 
 			{
-				if (matrix[i] != 0) 
+				if (_matrix[i] != 0) 
 				{
-					this.tiles[i].visible = true;
+					this._tiles[i].visible = true;
 				}
 			}
 		}
 		private function saveLayer():void {
-			for (var i:int = 0; i < tiles.length; i++) 
+			for (var i:int = 0; i < _tiles.length; i++) 
 			{
-				this.tiles[i].visible = false;
+				this._tiles[i].visible = false;
 			}
 		}
 	}

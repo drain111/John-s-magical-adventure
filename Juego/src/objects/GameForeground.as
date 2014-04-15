@@ -13,9 +13,9 @@ package objects
 		private var _sectorX:int;
 		private var _sectorY:int;
 		
-		private var objectsMap:Array;
-		private var treesMap:Array;
-		private var ceilingsMap:Array;
+		private var _objectsMap:Array;
+		private var _treesMap:Array;
+		private var _ceilingsMap:Array;
 		
 		private var _editor:Editor;
 		
@@ -25,11 +25,11 @@ package objects
 		public var rows:int;
 		public var columns:int;
 		
-		private var loaded:Boolean = false;
+		private var _loaded:Boolean = false;
 		
-		private var objectsLayer:BgLayer;
-		private var treesLayer:BgLayer;
-		private var ceilingsLayer:BgLayer;
+		private var _objectsLayer:BgLayer;
+		private var _treesLayer:BgLayer;
+		private var _ceilingsLayer:BgLayer;
 		
 		public function GameForeground(sectorX:int, sectorY:int, editor:Editor) 
 		{
@@ -54,21 +54,21 @@ package objects
 		private function onAddedToStage(event:Event):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			objectsMap = new Array();
-			createVoidTileMap(objectsMap, rows, columns, false);
-			objectsLayer = new BgLayer("terrain", _sectorX, _sectorY, 4, rows, columns, tileDimension, objectsMap, editor, true);
+			_objectsMap = new Array();
+			createVoidTileMap(_objectsMap, rows, columns, false);
+			_objectsLayer = new BgLayer("terrain", _sectorX, _sectorY, 4, rows, columns, tileDimension, _objectsMap, editor, true);
 			
-			treesMap = new Array();
-			createVoidTileMap(treesMap, rows, columns, false);
-			treesLayer = new BgLayer("terrain", _sectorX, _sectorY, 5, rows, columns, tileDimension, treesMap, editor, true);
+			_treesMap = new Array();
+			createVoidTileMap(_treesMap, rows, columns, false);
+			_treesLayer = new BgLayer("terrain", _sectorX, _sectorY, 5, rows, columns, tileDimension, _treesMap, editor, true);
 			
-			ceilingsMap = new Array();
-			createVoidTileMap(ceilingsMap, rows, columns, false);
-			ceilingsLayer = new BgLayer("terrain", _sectorX, _sectorY, 6, rows, columns, tileDimension, ceilingsMap, editor, true);
+			_ceilingsMap = new Array();
+			createVoidTileMap(_ceilingsMap, rows, columns, false);
+			_ceilingsLayer = new BgLayer("terrain", _sectorX, _sectorY, 6, rows, columns, tileDimension, _ceilingsMap, editor, true);
 			
-			this.addChild(objectsLayer);
-			this.addChild(treesLayer);
-			this.addChild(ceilingsLayer);
+			this.addChild(_objectsLayer);
+			this.addChild(_treesLayer);
+			this.addChild(_ceilingsLayer);
 			
 			this.addChild(editor);
 		}

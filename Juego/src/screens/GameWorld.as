@@ -34,10 +34,10 @@ package screens
 	public class GameWorld extends Sprite 
 	{
 		private var backgroundMap:Vector.<GameBackground>;
-		private var frontgroundMap:Vector.<GameForeground>;
+		private var foregroundMap:Vector.<GameForeground>;
 		/*Editado hoy*/
 		private var loadedBackgroundMaps:Vector.<GameBackground>;
-		private var loadedFrontgroundMaps:Vector.<GameForeground>;
+		private var loadedForegroundMaps:Vector.<GameForeground>;
 		/*-----------*/
 		private var XSectors:int = 30;
 		private var YSectors:int = 30;
@@ -79,11 +79,11 @@ package screens
 		
 		private function drawGame():void {
 			backgroundMap = new Vector.<GameBackground>;
-			frontgroundMap = new Vector.<GameForeground>;
+			foregroundMap = new Vector.<GameForeground>;
 			
 			/*Editado hoy*/
 			loadedBackgroundMaps = new Vector.<GameBackground>;
-			loadedFrontgroundMaps = new Vector.<GameForeground>;
+			loadedForegroundMaps = new Vector.<GameForeground>;
 			/*-----------*/
 			
 			editor = new Editor( 500 / 36 + 1, 500 / 36 + 1, XSectors, YSectors);
@@ -92,7 +92,7 @@ package screens
 			/*-----------*/
 			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
-			createFrontgroundMap(frontgroundMap, XSectors, YSectors, editor);
+			createForegroundMap(foregroundMap, XSectors, YSectors, editor);
 			
 			
 			/* todo */
@@ -168,7 +168,7 @@ package screens
 			if (loadedBackgroundMaps.length > 0) 
 			{
 				removeBackground();
-				removeFrontground();
+				removeForeground();
 				this.removeChild(editor);
 				this.removeChild(player);
 				this.removeChild(slime);
@@ -189,15 +189,15 @@ package screens
 			for (var i:int = 0; i < sectors.length; i++) 
 			{
 				loadedBackgroundMaps.push(backgroundMap[sectors[i]]);
-				loadedFrontgroundMaps.push(frontgroundMap[sectors[i]]);
+				loadedForegroundMaps.push(foregroundMap[sectors[i]]);
 			}
 			for (var j:int = 0; j < loadedBackgroundMaps.length; j++) 
 			{
 				this.addChild(loadedBackgroundMaps[j]);
 			}
-			for (var k:int = 0; k < loadedFrontgroundMaps.length; k++) 
+			for (var k:int = 0; k < loadedForegroundMaps.length; k++) 
 			{
-				this.addChild(loadedFrontgroundMaps[k]);
+				this.addChild(loadedForegroundMaps[k]);
 			}
 
 			
@@ -208,12 +208,12 @@ package screens
 			//this.addChild(camera);
 		}
 		
-		public function removeFrontground():void {
-			for (var i:int = 0; i <loadedFrontgroundMaps.length; i++) 
+		public function removeForeground():void {
+			for (var i:int = 0; i <loadedForegroundMaps.length; i++) 
 			{
-				this.removeChild(loadedFrontgroundMaps[i]);
+				this.removeChild(loadedForegroundMaps[i]);
 			}
-			loadedFrontgroundMaps.splice(0, loadedFrontgroundMaps.length);
+			loadedForegroundMaps.splice(0, loadedForegroundMaps.length);
 		}
 		
 		public function removeBackground():void {
@@ -271,7 +271,7 @@ package screens
 			}
 		}
 		
-		public function createFrontgroundMap(map:Vector.<GameForeground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
+		public function createForegroundMap(map:Vector.<GameForeground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
 			
 			var cont:int = 0;
 			var contX:int = 0;

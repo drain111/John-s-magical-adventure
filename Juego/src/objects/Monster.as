@@ -12,7 +12,7 @@ package objects
 	public class Monster extends Sprite 
 	{
 		private var _health:int;
-		private var MonsterArt:Image;
+		private var _monsterArt:Image;
 		private var _alreadyhit:int;
 		
 		public function Monster() 
@@ -30,9 +30,9 @@ package objects
 		
 		private function createMonsterArt():void
 		{
-			MonsterArt = new Image(Assets.getAtlas().getTexture("slime"));
-			MonsterArt.x = Math.ceil(-MonsterArt.width/2);
-			MonsterArt.y = Math.ceil( -MonsterArt.height / 2);
+			_monsterArt = new Image(Assets.getAtlas().getTexture("slime"));
+			_monsterArt.x = Math.ceil(-_monsterArt.width/2);
+			_monsterArt.y = Math.ceil( -_monsterArt.height / 2);
 			health = 100;
 			alreadyhit = 0;
 			//starling.core.Starling.juggler.add(heroArt);
@@ -45,7 +45,7 @@ package objects
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, changeside);*/
 			
-			this.addChild(MonsterArt);
+			this.addChild(_monsterArt);
 			
 			
 			
