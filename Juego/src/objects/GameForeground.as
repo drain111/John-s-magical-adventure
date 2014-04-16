@@ -56,15 +56,15 @@ package objects
 			
 			_objectsMap = new Array();
 			createVoidTileMap(_objectsMap, rows, columns, false);
-			_objectsLayer = new BgLayer("terrain", _sectorX, _sectorY, 4, rows, columns, tileDimension, _objectsMap, editor, true);
+			_objectsLayer = new BgLayer("objectsAndWalls", _sectorX, _sectorY, 4, rows, columns, tileDimension, _objectsMap, editor, true);
 			
 			_treesMap = new Array();
 			createVoidTileMap(_treesMap, rows, columns, false);
-			_treesLayer = new BgLayer("terrain", _sectorX, _sectorY, 5, rows, columns, tileDimension, _treesMap, editor, true);
+			_treesLayer = new BgLayer("trees", _sectorX, _sectorY, 5, rows, columns, tileDimension, _treesMap, editor, true);
 			
 			_ceilingsMap = new Array();
 			createVoidTileMap(_ceilingsMap, rows, columns, false);
-			_ceilingsLayer = new BgLayer("terrain", _sectorX, _sectorY, 6, rows, columns, tileDimension, _ceilingsMap, editor, true);
+			_ceilingsLayer = new BgLayer("ceilings", _sectorX, _sectorY, 6, rows, columns, tileDimension, _ceilingsMap, editor, true);
 			
 			this.addChild(_objectsLayer);
 			this.addChild(_treesLayer);

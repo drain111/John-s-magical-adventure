@@ -77,6 +77,7 @@ package objects
 		{
 			
 		}
+		
 		public function changeside(e:KeyboardEvent):void
 		{
 			if (e.keyCode == Keyboard.N ) 

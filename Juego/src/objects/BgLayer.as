@@ -104,7 +104,7 @@ package objects
 		}
 		
 		private function refreshMap():void {
-			if (this._editor != null && this._editor.actualXSector == this._sectorX && this._editor.actualYSector == this._sectorY && this._editor.changeMapTile ) 
+			if (this._editor != null && this._editor.actualXSector == this._sectorX && this._editor.actualYSector == this._sectorY && this._editor.changeMapTile && this._editor.layer == this._layer) 
 			{
 				var index:int = (this._editor.sectorYPos * this._numColumns) + this._editor.sectorXPos;
 				this._matrix[index] = this._editor.tileToChange;

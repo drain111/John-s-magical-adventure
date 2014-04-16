@@ -33,11 +33,15 @@ package objects
 		
 		private var _maxRowsSector:int;
 		private var _maxColumnsSector:int;
-		private var _maxXSectors:int = 2;
-		private var _maxYSectors:int = 2;
+		private var _maxXSectors:int;
+		private var _maxYSectors:int;
 		
 		private var _actualXSector:int;
 		private var _actualYSector:int;
+		private var _layer:int = 1;
+		private var _layerName:String = "terrain";
+		private var _firstIndexImage:int = 1;
+		private var _lastIndexImage:int = 10;
 		
 		private var _image:Image;
 		
@@ -70,7 +74,7 @@ package objects
 		private function initializeEditor():void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, initializeEditor);
 			
-			this._image = new Image(Assets.getAtlas().getTexture("terrain_" + _tileSelected));
+			this._image = new Image(Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected));
 			this._image.x = _realXpos;
 			this._image.y = _realYpos;
 			this._image.height = _editorDim;
@@ -113,13 +117,30 @@ package objects
 			
 			if (e.keyCode == Keyboard.Q) 
 			{
-				if (this._tileSelected > 1) this._tileSelected -= 1;
-				else this._tileSelected = 18;
+				if (this._tileSelected == this._firstIndexImage) this._tileSelected = this._lastIndexImage;
+				else this._tileSelected -= 1;
 			}
 			if (e.keyCode == Keyboard.E) 
 			{
-				if (this._tileSelected < 18) this._tileSelected += 1;
-				else this._tileSelected = 1;
+				if (this._tileSelected == this._lastIndexImage) this._tileSelected = this._firstIndexImage;
+				else this._tileSelected += 1;
+			}
+			
+			if (e.keyCode == Keyboard.R) 
+			{
+				if (this._layer == 6) this._layer = 1;
+				else this._layer += 1;
+				this._tileSelected = this._firstIndexImage;
+				this._lastTileSelected = this._lastIndexImage;
+				this.changeImage();
+			}
+			if (e.keyCode == Keyboard.F) 
+			{
+				if (this._layer == 1) this._layer = 6;
+				else this._layer -= 1;
+				this._tileSelected = this._firstIndexImage;
+				this._lastTileSelected = this._lastIndexImage;
+				this.changeImage();
 			}
 			
 			if (e.keyCode == Keyboard.P) 
@@ -145,18 +166,49 @@ package objects
 			
 			this._realXpos = _Xpos * _editorDim;
 			this._realYpos = _Ypos * _editorDim;
+			
+			switch (this._layer) {
+				case 1:
+					this._layerName = "terrain";
+					this._lastIndexImage = 17;
+					break;
+				case 2:
+					this._layerName = "roads";
+					this._lastIndexImage = 2;
+					break;
+				case 3:
+					this._layerName = "objectsAndWalls";
+					this._lastIndexImage = 7;
+					break;
+				case 4:
+					this._layerName = "objectsAndWalls";
+					this._lastIndexImage = 7;
+					break;
+				case 5:
+					this._layerName = "trees";
+					this._lastIndexImage = 4;
+					break;
+				case 6:
+					this._layerName = "ceilings";
+					this._lastIndexImage = 9;
+					break;
+				default:
+					this._layerName = "terrain";
+					this._lastIndexImage = 17;
+					break;
+			}
 		}
 		
 		private function changeImage():void {
 			if (this._tileSelected != 0) 
 			{
-				this._image.texture = Assets.getAtlas().getTexture("terrain_" + _tileSelected);
+				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
 				this._lastTileSelected = this._tileSelected;
 			}
 			else 
 			{
 				this._tileSelected = this._lastTileSelected;
-				this._image.texture = Assets.getAtlas().getTexture("terrain_" + _tileSelected);
+				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
 			}
 			
 		}
@@ -252,6 +304,16 @@ package objects
 		public function set sectorYPos(value:int):void 
 		{
 			_sectorYPos = value;
+		}
+		
+		public function get layer():int 
+		{
+			return _layer;
+		}
+		
+		public function set layer(value:int):void 
+		{
+			_layer = value;
 		}
 		
 	}

@@ -45,8 +45,8 @@ package screens
 		private var loadedBackgroundMaps:Vector.<GameBackground>;
 		private var loadedForegroundMaps:Vector.<GameForeground>;
 		/*-----------*/
-		private var XSectors:int = 30;
-		private var YSectors:int = 30;
+		private var XSectors:int;
+		private var YSectors:int;
 		private var camera:Camera;
 		
 		
@@ -64,7 +64,7 @@ package screens
 		
 		private var slime:Monster;
 		
-		private var iss:Boolean;
+		//private var iss:Boolean;
 
 		private var isRight:Boolean = false;
         private var isLeft:Boolean = false;
@@ -83,6 +83,9 @@ package screens
 		private function onAddedToStage(event:Event):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
+			XSectors = GlobalVariables.MAX_X_SECTORS;
+			YSectors = GlobalVariables.MAX_Y_SECTORS;
+			
 			drawGame();
 		}
 		
@@ -96,10 +99,12 @@ package screens
 			loadedForegroundMaps = new Vector.<GameForeground>;
 			/*-----------*/
 			
-			editor = new Editor( 500 / 36 + 1, 500 / 36 + 1, XSectors, YSectors);
+			editor = new Editor( GlobalVariables.ROWS, GlobalVariables.COLUMNS, XSectors, YSectors);
+			
 			/*Editado hoy*/
 			lastSector = new Point(editor.actualXSector, editor.actualYSector);
 			/*-----------*/
+			
 			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
 			createForegroundMap(foregroundMap, XSectors, YSectors, editor);
@@ -115,24 +120,20 @@ package screens
 			particles.scaleY = 1.2;
 			this.addChild(particles);
 			
-			
+			//Create the vector for the particles.
 			magicParticlesToAnimate = new Vector.<Particle>();
 			
-			
-			iss = true;
-			
-			/* player  */
+			//Create the player, camera and slime
 			player = new Player();
 			this.addChild(player);
 			this.camera = new Camera(player);
 			this.addChild(camera);
 			slime = new Monster();
+			slime.x = 40;
+			slime.y = 40;
 			this.addChild(slime);
 			
-			
-			//circle
-			
-			
+			//Load maps for the first time.
 			reloadMaps();
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
@@ -159,13 +160,13 @@ package screens
 			var touch:Touch = e.getTouch(this);
 			slime.touchable = true;
 			slime.useHandCursor = true;
-			//var localpos:Point = touch.getLocation(this);
-			/*if (touch.phase == TouchPhase.BEGAN && slime.hitTest(localpos))
+			var localpos:Point = touch.getLocation(this);
+			if (touch && slime.hitTest(localpos))
 			{
 				slime.x = localpos.x;
 				slime.y = localpos.y;
 			}
-			touch = e.getTouch(this, TouchPhase.ENDED);*/
+			touch = e.getTouch(this, TouchPhase.ENDED);
 			
 		}
 		
@@ -176,32 +177,36 @@ package screens
 				if(player.obtainactualspell() != 3)
 					createMagicParticles();
 			}
+			
 			if (e.keyCode == Keyboard.X)
 			{
 				player.pushtheactualspell();
-				
 			}
+			
 			if (e.keyCode == Keyboard.N ) 
 			{
 				isUp = false;
 			}
+			
 			else{
-			if (e.keyCode == Keyboard.M) 
-			{
-				isDown = false;
-			}
-			else{
-			if (e.keyCode == Keyboard.V) 
-			{
-				isLeft = false;
-			}
-			else{
-			if (e.keyCode == Keyboard.C) 
-			{
-				isRight = false;
-			}
-			}
-			}
+				if (e.keyCode == Keyboard.M) 
+				{
+					isDown = false;
+				}
+				
+				else{
+					if (e.keyCode == Keyboard.V) 
+					{
+						isLeft = false;
+					}
+					
+					else{
+						if (e.keyCode == Keyboard.C) 
+						{
+							isRight = false;
+						}
+					}
+				}
 			}
 		}
 		
@@ -209,28 +214,23 @@ package screens
 		
 		private function update(e:Event):void 
 		{
-			
-			
-			
+			//Update camera
 			this.x = camera.posX;
 			this.y = camera.posY;
 			
+			//Animate particles.
 			animatemagicParticles();
 			
-			if (isUp) player.y -= 5;
-			else if(isDown) player.y += 5;
-			else if(isLeft) player.x -= 5;
-			else if (isRight) player.x += 5;
+			//Move player
+			if (isUp) player.y -= 2;
+			else if(isDown) player.y += 2;
+			else if(isLeft) player.x -= 2;
+			else if (isRight) player.x += 2;
 			if (attacking) {
 				
 			}
-			
-
-			
-			slime.x = 40;
-			slime.y = 40;
 		
-			/*Editado hoy*/
+			//Check sector.
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
 			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
 				lastSector = actualSector;
@@ -238,9 +238,11 @@ package screens
 				
 			}
 			
-			if (slime.health <= 0) this.removeChild(slime);
 			
+
 			/*-----------*/	
+
+			if (slime.health <= 0) this.removeChild(slime);
 		}
 		
 		/*Editado hoy*/
@@ -276,6 +278,11 @@ package screens
 			{
 				this.addChild(loadedBackgroundMaps[j]);
 			}
+			
+			this.addChild(player);
+
+			this.addChild(slime);
+			
 			for (var k:int = 0; k < loadedForegroundMaps.length; k++) 
 			{
 				this.addChild(loadedForegroundMaps[k]);
@@ -283,9 +290,7 @@ package screens
 
 			
 			this.addChild(editor);
-			this.addChild(player);
-
-			this.addChild(slime);
+			
 			//this.addChild(camera);
 		}
 		
