@@ -30,7 +30,7 @@ package objects
 		{
 			super();
 			
-			_image = new Image(Assets.getAtlas().getTexture("magicparticle1"));
+			_image = new Image(Assets.getAtlas().getTexture("magicparticle2"));
 			_image.x = _image.width * 0.5;
 			_image.y = _image.height * 0.5;
 			this.addChild(_image);

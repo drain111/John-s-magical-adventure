@@ -199,7 +199,6 @@
             <filename>ceil_8.png</filename>
             <filename>ceil_9.png</filename>
             <filename>slime.png</filename>
-            <filename>../../Juego/assets/particles/magicparticle.png</filename>
             <filename>Mage_4.png</filename>
             <filename>Mage_3.png</filename>
             <filename>Mage_2.png</filename>
@@ -210,6 +209,8 @@
             <filename>Objectsandwalls_4.png</filename>
             <filename>Objectsandwalls_5.png</filename>
             <filename>../../Juego/assets/particles/magicparticle2.png</filename>
+            <filename>../../Juego/assets/particles/magicparticle1.png</filename>
+            <filename>../../Juego/assets/particles/magicparticle0.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

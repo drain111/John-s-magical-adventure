@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:eb4331aba260bfa0ea3e9b97e66769d4:612b4ffacee8a42ba18545a6f4798edb:34dd15f328e3b24bd15123c5f7094c28$ -->
+<!-- $TexturePacker:SmartUpdate:0358932ce28125a692f8ba39327dbbc8:72da00f70aa0a1ec37384303ec8796c9:34dd15f328e3b24bd15123c5f7094c28$ -->
 <TextureAtlas imagePath="myspritesheet.png">
     <SubTexture name="Mage_1" x="2" y="2" width="32" height="64"/>
     <SubTexture name="Mage_2" x="35" y="2" width="32" height="64"/>
@@ -23,27 +23,28 @@
     <SubTexture name="ceil_9" x="126" y="104" width="30" height="30"/>
     <SubTexture name="magicparticle0" x="157" y="104" width="32" height="32"/>
     <SubTexture name="magicparticle1" x="190" y="104" width="32" height="32"/>
-    <SubTexture name="slime" x="2" y="137" width="32" height="32"/>
-    <SubTexture name="terrain_1" x="35" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_10" x="66" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_11" x="97" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_12" x="128" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_13" x="159" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_14" x="190" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_15" x="221" y="137" width="30" height="30"/>
-    <SubTexture name="terrain_16" x="2" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_17" x="33" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_18" x="64" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_2" x="95" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_3" x="126" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_4" x="157" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_5" x="188" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_6" x="219" y="170" width="30" height="30"/>
-    <SubTexture name="terrain_7" x="2" y="201" width="30" height="30"/>
-    <SubTexture name="terrain_8" x="33" y="201" width="30" height="30"/>
-    <SubTexture name="terrain_9" x="64" y="201" width="30" height="30"/>
-    <SubTexture name="wall_1" x="95" y="201" width="30" height="30"/>
-    <SubTexture name="wall_2" x="126" y="201" width="30" height="30"/>
-    <SubTexture name="wall_3" x="157" y="201" width="30" height="30"/>
-    <SubTexture name="wall_4" x="188" y="201" width="30" height="30"/>
+    <SubTexture name="magicparticle2" x="2" y="137" width="32" height="32"/>
+    <SubTexture name="slime" x="35" y="137" width="32" height="32"/>
+    <SubTexture name="terrain_1" x="68" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_10" x="99" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_11" x="130" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_12" x="161" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_13" x="192" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_14" x="223" y="137" width="30" height="30"/>
+    <SubTexture name="terrain_15" x="2" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_16" x="33" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_17" x="64" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_18" x="95" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_2" x="126" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_3" x="157" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_4" x="188" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_5" x="219" y="170" width="30" height="30"/>
+    <SubTexture name="terrain_6" x="2" y="201" width="30" height="30"/>
+    <SubTexture name="terrain_7" x="33" y="201" width="30" height="30"/>
+    <SubTexture name="terrain_8" x="64" y="201" width="30" height="30"/>
+    <SubTexture name="terrain_9" x="95" y="201" width="30" height="30"/>
+    <SubTexture name="wall_1" x="126" y="201" width="30" height="30"/>
+    <SubTexture name="wall_2" x="157" y="201" width="30" height="30"/>
+    <SubTexture name="wall_3" x="188" y="201" width="30" height="30"/>
+    <SubTexture name="wall_4" x="219" y="201" width="30" height="30"/>
 </TextureAtlas>

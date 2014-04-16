@@ -37,8 +37,8 @@ package objects
 
 			
 			_health = 100;
-			_directionx = 1;
-			_directiony = -1;
+			_directionx = 0;
+			_directiony = 1;
 			_magic = new Vector.<int>;
 			_magic.push(2);
 			_magic.push(1);

@@ -102,7 +102,7 @@ package screens
 			
 			/* todo */
 			
-			var particles:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.ParticleTexture()));
+			var particles:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.Particle1Texture()));
 			Starling.juggler.add(particle);
 			particles.x = -100;
 			particles.y = -100;
@@ -193,8 +193,8 @@ package screens
 				
 			}
 			
-			slime.x = player.x + 40;
-			slime.y = player.y + 100;
+			slime.x = 40;
+			slime.y = 40;
 		
 			/*Editado hoy*/
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
@@ -378,14 +378,14 @@ package screens
 		
 		public function createMagicParticles(itemToTrack:Point):void {
 			
-			var count:int = 200;
+			var count:int = 100;
 			var x:int = 0;
+			var oscilation:int = 1;
 			while (count > 0)
 			{
 				count--;
 				
 				var particle:Particle = new Particle();
-				if(player.obtainactualspell() != 2)
 				particle.image.texture = Assets.getAtlas().getTexture("magicparticle" + player.obtainactualspell());
 				particle.x = player.x;
 				particle.y = player.y;
@@ -394,9 +394,15 @@ package screens
 				particle.x = player.x + 50*Math.cos(x);
 				particle.y = player.y + 50 * Math.sin(x++);
 				}
-				else if (player.obtainactualspell() == 1) {
+				else if (player.obtainactualspell() == 2) {
 					particle.x += x * player.directionx;
 					particle.y += x++ * player.directiony;
+				}
+				else {
+					particle.x +=  x  * (player.directionx==1 || player.directionx==-1?player.directionx:oscilation);
+					particle.y += x++ * (player.directiony==1 || player.directiony==-1?player.directiony:oscilation);
+					oscilation *= -1;
+
 				}
 				
 				particle.speedX = Math.random() * 2 + 1;
