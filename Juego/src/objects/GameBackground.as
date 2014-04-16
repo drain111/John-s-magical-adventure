@@ -40,12 +40,12 @@ package objects
 			_editor = editor;
 			
 			
-			tileDimension = 36;
+			tileDimension = GlobalVariables.TILE_DIMENSIONS;
 			
 			_editor.editorDim =  tileDimension;
 			
-			rows = 500 / tileDimension + 1;
-			columns = 500 / tileDimension + 1;
+			rows = GlobalVariables.ROWS;
+			columns = GlobalVariables.COLUMNS;
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -59,11 +59,11 @@ package objects
 			
 			_roadsMap = new Array();
 			createVoidTileMap(_roadsMap, rows, columns, false);
-			_roadsLayer = new BgLayer("terrain", _sectorX, _sectorY, 2, rows, columns, tileDimension, _roadsMap, editor, true);
+			_roadsLayer = new BgLayer("roads", _sectorX, _sectorY, 2, rows, columns, tileDimension, _roadsMap, editor, true);
 			
 			_objectsAndWallsMap = new Array();
 			createVoidTileMap(_objectsAndWallsMap, rows, columns, false);
-			_objectsAndWallsLayer = new BgLayer("terrain", _sectorX, _sectorY, 3, rows, columns, tileDimension, _objectsAndWallsMap, editor, true);
+			_objectsAndWallsLayer = new BgLayer("objectsAndWalls", _sectorX, _sectorY, 3, rows, columns, tileDimension, _objectsAndWallsMap, editor, true);
 			
 			this.addChild(_terrainLayer);
 			this.addChild(_roadsLayer);
