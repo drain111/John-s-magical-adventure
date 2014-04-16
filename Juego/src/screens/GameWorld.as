@@ -140,9 +140,11 @@ package screens
 		private function puzzles(e:TouchEvent):void 
 		{
 			var touch:Touch = e.getTouch(this);
-			if (touch)
+			slime.touchable = true;
+			slime.useHandCursor = true;
+			var localpos:Point = touch.getLocation(this);
+			if (touch.phase == TouchPhase.BEGAN && slime.hitTest(localpos))
 			{
-				var localpos:Point = touch.getLocation(this);
 				slime.x = localpos.x;
 				slime.y = localpos.y;
 			}
