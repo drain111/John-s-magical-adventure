@@ -94,5 +94,15 @@ package objects
 		{
 			_editor = value;
 		}
+		
+		public function get terrainMap():Array 
+		{
+			return _terrainMap;
+		}
+		
+		public function set terrainMap(value:Array):void 
+		{
+			_terrainMap = value;
+		}
 	}
 }

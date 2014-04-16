@@ -1,5 +1,6 @@
 package screens 
 {
+	import flash.events.IOErrorEvent;
 	import flash.geom.Rectangle;
 	import objects.Player;
 	import flash.geom.Point;
@@ -11,6 +12,7 @@ package screens
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.extensions.PDParticleSystem;
+	import starling.text.TextField;
 	import starling.textures.Texture;
 	import starling.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -20,6 +22,8 @@ package screens
 	import starling.events.TouchPhase;
 	import objects.Monster;
 	import starling.display.Image;
+	import flash.net.*;
+	import flash.text.TextField;
 
 	
 	
@@ -66,6 +70,7 @@ package screens
         private var isLeft:Boolean = false;
         private var isUp:Boolean = false;
         private var isDown:Boolean = false;
+
 
 		
 		public function GameWorld() 
@@ -135,20 +140,32 @@ package screens
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
+			var string:String = backgroundMap[0].terrainMap.join();
+			var file:FileReference = new FileReference;
+			var xml:XML = < data/>;
+			xml.datos = string;
+		    
+			file.save(xml);
+			file.addEventListener(Event.CLOSE, close );
+
 		}
 		
+		private function close(e:Event):void 
+		{
+			
+		}
 		private function puzzles(e:TouchEvent):void 
 		{
 			var touch:Touch = e.getTouch(this);
 			slime.touchable = true;
 			slime.useHandCursor = true;
-			var localpos:Point = touch.getLocation(this);
-			if (touch.phase == TouchPhase.BEGAN && slime.hitTest(localpos))
+			//var localpos:Point = touch.getLocation(this);
+			/*if (touch.phase == TouchPhase.BEGAN && slime.hitTest(localpos))
 			{
 				slime.x = localpos.x;
 				slime.y = localpos.y;
 			}
-			touch = e.getTouch(this, TouchPhase.ENDED);
+			touch = e.getTouch(this, TouchPhase.ENDED);*/
 			
 		}
 		
@@ -208,6 +225,7 @@ package screens
 				
 			}
 			
+
 			
 			slime.x = 40;
 			slime.y = 40;
@@ -222,8 +240,7 @@ package screens
 			
 			if (slime.health <= 0) this.removeChild(slime);
 			
-			/*-----------*/
-						
+			/*-----------*/	
 		}
 		
 		/*Editado hoy*/
@@ -335,6 +352,7 @@ package screens
 				}
 				contX++;
 			}
+			
 		}
 		
 		public function createForegroundMap(map:Vector.<GameForeground>,numXSectors:int, numberYSectors:int, editor:Editor):void {

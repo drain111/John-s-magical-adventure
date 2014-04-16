@@ -68,9 +68,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>2048</int>
+            <int>512</int>
             <key>height</key>
-            <int>2048</int>
+            <int>512</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -166,7 +166,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>terrain_18.png</filename>
             <filename>terrain_1.png</filename>
             <filename>terrain_2.png</filename>
             <filename>terrain_3.png</filename>
@@ -185,32 +184,35 @@
             <filename>terrain_17.png</filename>
             <filename>terrain_16.png</filename>
             <filename>Mage_1.png</filename>
-            <filename>wall_1.png</filename>
-            <filename>wall_2.png</filename>
-            <filename>wall_3.png</filename>
-            <filename>wall_4.png</filename>
-            <filename>ceil_11.png</filename>
-            <filename>ceil_10.png</filename>
-            <filename>ceil_3.png</filename>
-            <filename>ceil_4.png</filename>
-            <filename>ceil_5.png</filename>
-            <filename>ceil_6.png</filename>
-            <filename>ceil_7.png</filename>
-            <filename>ceil_8.png</filename>
-            <filename>ceil_9.png</filename>
             <filename>slime.png</filename>
             <filename>Mage_4.png</filename>
             <filename>Mage_3.png</filename>
             <filename>Mage_2.png</filename>
-            <filename>Objectsandwalls_6.png</filename>
-            <filename>Objectsandwalls_1.png</filename>
-            <filename>Objectsandwalls_2.png</filename>
-            <filename>Objectsandwalls_3.png</filename>
-            <filename>Objectsandwalls_4.png</filename>
-            <filename>Objectsandwalls_5.png</filename>
             <filename>../../Juego/assets/particles/magicparticle2.png</filename>
             <filename>../../Juego/assets/particles/magicparticle1.png</filename>
             <filename>../../Juego/assets/particles/magicparticle0.png</filename>
+            <filename>ceilings_9.png</filename>
+            <filename>ceilings_2.png</filename>
+            <filename>ceilings_1.png</filename>
+            <filename>ceilings_3.png</filename>
+            <filename>ceilings_4.png</filename>
+            <filename>ceilings_5.png</filename>
+            <filename>ceilings_6.png</filename>
+            <filename>ceilings_7.png</filename>
+            <filename>ceilings_8.png</filename>
+            <filename>roads_2.png</filename>
+            <filename>objectsAndWalls_1.png</filename>
+            <filename>objectsAndWalls_2.png</filename>
+            <filename>objectsAndWalls_3.png</filename>
+            <filename>objectsAndWalls_4.png</filename>
+            <filename>objectsAndWalls_5.png</filename>
+            <filename>objectsAndWalls_6.png</filename>
+            <filename>objectsAndWalls_7.png</filename>
+            <filename>roads_1.png</filename>
+            <filename>trees_4.png</filename>
+            <filename>trees_1.png</filename>
+            <filename>trees_2.png</filename>
+            <filename>trees_3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
