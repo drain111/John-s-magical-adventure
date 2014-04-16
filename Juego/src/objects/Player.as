@@ -40,6 +40,7 @@ package objects
 			_directionx = 0;
 			_directiony = 1;
 			_magic = new Vector.<int>;
+			_magic.push(3);
 			_magic.push(2);
 			_magic.push(1);
 			_magic.push(0);

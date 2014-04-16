@@ -14,6 +14,7 @@ package objects
 		private var _health:int;
 		private var _monsterArt:Image;
 		private var _alreadyhit:Boolean;
+		private var _beingtouched:Boolean; //provisional variable desgined for puzzle objects.
 		
 		public function Monster() 
 		{
@@ -68,6 +69,16 @@ package objects
 		public function set alreadyhit(value:Boolean):void 
 		{
 			_alreadyhit = value;
+		}
+		
+		public function get beingtouched():Boolean 
+		{
+			return _beingtouched;
+		}
+		
+		public function set beingtouched(value:Boolean):void 
+		{
+			_beingtouched = value;
 		}
 		
 	}

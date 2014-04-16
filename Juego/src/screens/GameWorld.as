@@ -132,8 +132,21 @@ package screens
 			
 			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
 			this.addEventListener(KeyboardEvent.KEY_UP, release);
-
+			
 			this.addEventListener(Event.ENTER_FRAME, update);
+			
+		}
+		
+		private function puzzles(e:TouchEvent):void 
+		{
+			var touch:Touch = e.getTouch(this);
+			if (touch)
+			{
+				var localpos:Point = touch.getLocation(this);
+				slime.x = localpos.x;
+				slime.y = localpos.y;
+			}
+			touch = e.getTouch(this, TouchPhase.ENDED);
 			
 		}
 		
@@ -141,8 +154,8 @@ package screens
 		{
 			if (e.keyCode == Keyboard.B)
 			{
-				var localPos:Point = new Point(((player.x + (player.x-player.width) ) / 2 + 100)* player.directionx, ((player.y + (player.y - player.height) )+100)*player.directiony);
-				createMagicParticles(localPos);
+				if(player.obtainactualspell() != 3)
+					createMagicParticles();
 			}
 			if (e.keyCode == Keyboard.X)
 			{
@@ -192,6 +205,7 @@ package screens
 			if (attacking) {
 				
 			}
+			
 			
 			slime.x = 40;
 			slime.y = 40;
@@ -291,6 +305,8 @@ package screens
 		public function initialize():void {
 			this.visible = true;
 			
+			this.addEventListener(TouchEvent.TOUCH, puzzles);
+
 		}
 		
 		
@@ -376,7 +392,7 @@ package screens
 		
 		}
 		
-		public function createMagicParticles(itemToTrack:Point):void {
+		public function createMagicParticles():void {
 			
 			var count:int = 100;
 			var x:int = 0;
