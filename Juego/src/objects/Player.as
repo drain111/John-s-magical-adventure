@@ -69,7 +69,7 @@ package objects
 		}
 		private function createHeroArt():void
 		{
-			heroArt = new MovieClip(Assets.getAtlas().getTextures("Magonabaj" ),5);
+			heroArt = new MovieClip(Assets.getAtlas().getTextures("Magonabaj" ),10);
 			heroArt.x = Math.ceil(-heroArt.width/2);
 			heroArt.y = Math.ceil(-heroArt.height/2);
 			starling.core.Starling.juggler.add(heroArt);
@@ -132,10 +132,17 @@ package objects
 			heroArt.play();
 			if (e.keyCode == Keyboard.N ) 
 			{
-				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
 				_directiony = -1;
 				_directionx = 0;
 				isUp = true;
+				heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Magonarr0"));
+				heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Magonarr1"));
+				heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Magonarr2"));
+				heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Magonarr3"));
+				heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Magonarr4"));
+				heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Magonarr5"));
+				heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Magonarr6"));
+				heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Magonarr7"));
 				
 
 

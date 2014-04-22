@@ -64,15 +64,8 @@ package screens
 		
 		private var slime:Monster;
 		
-		//private var iss:Boolean;
 
-		/*private var isRight:Boolean = false;
-        private var isLeft:Boolean = false;
-        private var isUp:Boolean = false;
-        private var isDown:Boolean = false;*/
-		private var tocandopuzle:Boolean = false;
 		
-		private var point:Point;
 
 
 		
@@ -158,30 +151,7 @@ package screens
 		{
 			
 		}
-		private function puzzles(e:TouchEvent):void 
-		{
-			var touch:Touch = e.getTouch(this);
-			slime.touchable = true;
-			slime.useHandCursor = true;
-			point = touch.getLocation(this);
-			try {
-			if (touch.phase == TouchPhase.BEGAN && slime.bounds.intersects(touch.target.bounds))
-			{
-				
-				tocandopuzle = true;
-			}
-			else {
-				if (touch.phase == TouchPhase.ENDED) {
-					tocandopuzle = false;
-				}
-			}
-			
-			}
-			catch (e:Error){
-				trace("Normal error");
-			}
-			
-		}
+		
 		
 		private function release(e:KeyboardEvent):void 
 		{
@@ -190,37 +160,7 @@ package screens
 				if(player.obtainactualspell() != 3)
 					createMagicParticles();
 			}
-			/*
-			if (e.keyCode == Keyboard.X)
-			{
-				player.pushtheactualspell();
-			}
 			
-			if (e.keyCode == Keyboard.N ) 
-			{
-				isUp = false;
-			}
-			
-			else{
-				if (e.keyCode == Keyboard.M) 
-				{
-					isDown = false;
-				}
-				
-				else{
-					if (e.keyCode == Keyboard.V) 
-					{
-						isLeft = false;
-					}
-					
-					else{
-						if (e.keyCode == Keyboard.C) 
-						{
-							isRight = false;
-						}
-					}
-				}
-			} */
 		}
 		
 	
@@ -234,11 +174,7 @@ package screens
 			//Animate particles.
 			animatemagicParticles();
 			
-			//Move player
-			/*if (isUp) player.y -= 2;
-			else if(isDown) player.y += 2;
-			else if(isLeft) player.x -= 2;
-			else if (isRight) player.x += 2;*/
+		
 			if (attacking) {
 				
 			}
@@ -251,10 +187,7 @@ package screens
 				
 			}
 			
-			if (tocandopuzle == true) {
-				slime.x = point.x;
-				slime.y = point.y;
-			}
+			
 
 			/*-----------*/	
 
@@ -345,7 +278,6 @@ package screens
 		public function initialize():void {
 			this.visible = true;
 			
-			this.addEventListener(TouchEvent.TOUCH, puzzles);
 
 		}
 		
@@ -399,36 +331,7 @@ package screens
 		
 		public function attack(e:KeyboardEvent):void
 		{
-			
-			
-			
-			
-			
-			
-			//PRUEBAS
-			
-			/*if (e.keyCode == Keyboard.N ) 
-			{
-				isUp = true;
-			}
-			else{
-			if (e.keyCode == Keyboard.M) 
-			{
-				isDown = true;
-			}
-			else{
-			if (e.keyCode == Keyboard.V) 
-			{
-				isLeft = true;
-			}
-			else{
-			if (e.keyCode == Keyboard.C) 
-			{
-				isRight = true;
-			}
-			}
-			}
-			}*/
+		
 			
 		
 		}

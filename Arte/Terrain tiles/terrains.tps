@@ -221,6 +221,14 @@
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj2.png</filename>
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj1.png</filename>
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
