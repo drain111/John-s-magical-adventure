@@ -66,10 +66,13 @@ package screens
 		
 		//private var iss:Boolean;
 
-		private var isRight:Boolean = false;
+		/*private var isRight:Boolean = false;
         private var isLeft:Boolean = false;
         private var isUp:Boolean = false;
-        private var isDown:Boolean = false;
+        private var isDown:Boolean = false;*/
+		private var tocandopuzle:Boolean = false;
+		
+		private var point:Point;
 
 
 		
@@ -160,13 +163,23 @@ package screens
 			var touch:Touch = e.getTouch(this);
 			slime.touchable = true;
 			slime.useHandCursor = true;
-			var localpos:Point = touch.getLocation(this);
-			if (touch && slime.hitTest(localpos))
+			point = touch.getLocation(this);
+			try {
+			if (touch.phase == TouchPhase.BEGAN && slime.bounds.intersects(touch.target.bounds))
 			{
-				slime.x = localpos.x;
-				slime.y = localpos.y;
+				
+				tocandopuzle = true;
 			}
-			touch = e.getTouch(this, TouchPhase.ENDED);
+			else {
+				if (touch.phase == TouchPhase.ENDED) {
+					tocandopuzle = false;
+				}
+			}
+			
+			}
+			catch (e:Error){
+				trace("Normal error");
+			}
 			
 		}
 		
@@ -177,7 +190,7 @@ package screens
 				if(player.obtainactualspell() != 3)
 					createMagicParticles();
 			}
-			
+			/*
 			if (e.keyCode == Keyboard.X)
 			{
 				player.pushtheactualspell();
@@ -207,7 +220,7 @@ package screens
 						}
 					}
 				}
-			}
+			} */
 		}
 		
 	
@@ -222,10 +235,10 @@ package screens
 			animatemagicParticles();
 			
 			//Move player
-			if (isUp) player.y -= 2;
+			/*if (isUp) player.y -= 2;
 			else if(isDown) player.y += 2;
 			else if(isLeft) player.x -= 2;
-			else if (isRight) player.x += 2;
+			else if (isRight) player.x += 2;*/
 			if (attacking) {
 				
 			}
@@ -238,7 +251,10 @@ package screens
 				
 			}
 			
-			
+			if (tocandopuzle == true) {
+				slime.x = point.x;
+				slime.y = point.y;
+			}
 
 			/*-----------*/	
 
@@ -391,7 +407,7 @@ package screens
 			
 			//PRUEBAS
 			
-			if (e.keyCode == Keyboard.N ) 
+			/*if (e.keyCode == Keyboard.N ) 
 			{
 				isUp = true;
 			}
@@ -412,7 +428,7 @@ package screens
 			}
 			}
 			}
-			}
+			}*/
 			
 		
 		}

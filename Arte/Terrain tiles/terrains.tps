@@ -213,6 +213,14 @@
             <filename>trees_1.png</filename>
             <filename>trees_2.png</filename>
             <filename>trees_3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj0.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
