@@ -213,22 +213,46 @@
             <filename>trees_1.png</filename>
             <filename>trees_2.png</filename>
             <filename>trees_3.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj7.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj6.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj5.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj4.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj3.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj2.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj1.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonabaj0.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr0.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr7.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr6.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr5.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr4.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr3.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr2.png</filename>
-            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magonarr1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageup0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageright0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Mageleft0.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magedown1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb7.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb6.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb5.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb4.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb3.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb2.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb1.png</filename>
+            <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb0.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

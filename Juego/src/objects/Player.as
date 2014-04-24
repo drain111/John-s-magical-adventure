@@ -69,7 +69,7 @@ package objects
 		}
 		private function createHeroArt():void
 		{
-			heroArt = new MovieClip(Assets.getAtlas().getTextures("Magonabaj" ),10);
+			heroArt = new MovieClip(Assets.getAtlas().getTextures("Magestb"),10);
 			heroArt.x = Math.ceil(-heroArt.width/2);
 			heroArt.y = Math.ceil(-heroArt.height/2);
 			starling.core.Starling.juggler.add(heroArt);
@@ -85,6 +85,10 @@ package objects
 		
 		private function release(e:KeyboardEvent):void 
 		{
+			isUp = false;
+			isDown = false;
+			isLeft = false;
+			isRight = false;
 			heroArt.stop();
 			if (e.keyCode == Keyboard.X)
 			{
@@ -95,7 +99,7 @@ package objects
 			{
 				heroArt.texture = Assets.getAtlas().getTexture("Mage_1");
 
-				isUp = false;
+				
 			}
 			
 			else{
@@ -103,7 +107,6 @@ package objects
 				{
 					heroArt.texture = Assets.getAtlas().getTexture("Mage_2");
 
-					isDown = false;
 				}
 				
 				else{
@@ -111,7 +114,7 @@ package objects
 					{
 						heroArt.texture = Assets.getAtlas().getTexture("Mage_3");
 						
-						isLeft = false;
+
 					}
 					
 					else{
@@ -120,7 +123,6 @@ package objects
 							
 							heroArt.texture = Assets.getAtlas().getTexture("Mage_4");
 							
-							isRight = false;
 						}
 					}
 				}
@@ -135,14 +137,14 @@ package objects
 				_directiony = -1;
 				_directionx = 0;
 				isUp = true;
-				heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Magonarr0"));
-				heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Magonarr1"));
-				heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Magonarr2"));
-				heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Magonarr3"));
-				heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Magonarr4"));
-				heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Magonarr5"));
-				heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Magonarr6"));
-				heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Magonarr7"));
+				heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Mageup0"));
+				heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Mageup1"));
+				heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Mageup2"));
+				heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Mageup3"));
+				heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Mageup4"));
+				heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Mageup5"));
+				heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Mageup6"));
+				heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Mageup7"));
 				
 
 
@@ -154,14 +156,14 @@ package objects
 						_directiony = 1;
 						_directionx = 0;
 						isDown = true;
-						heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Magonabaj0"));
-						heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Magonabaj1"));
-						heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Magonabaj2"));
-						heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Magonabaj3"));
-						heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Magonabaj4"));
-						heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Magonabaj5"));
-						heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Magonabaj6"));
-						heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Magonabaj7"));
+						heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Magedown0"));
+						heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Magedown1"));
+						heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Magedown2"));
+						heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Magedown3"));
+						heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Magedown4"));
+						heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Magedown5"));
+						heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Magedown6"));
+						heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Magedown7"));
 						
 				
 					}
@@ -169,19 +171,32 @@ package objects
 					{
 						if (e.keyCode == Keyboard.V) 
 						{
-							heroArt.texture = Assets.getAtlas().getTexture("Mage_3");
 							directionx = -1;
 							directiony = 0;
 							isLeft = true;
+							heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Mageleft0"));
+							heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Mageleft1"));
+							heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Mageleft2"));
+							heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Mageleft3"));
+							heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Mageleft4"));
+							heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Mageleft5"));
+							heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Mageleft6"));
+							heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Mageleft7"));
 						}
 						else{
 							if (e.keyCode == Keyboard.C) 
 							{
-							heroArt.texture = Assets.getAtlas().getTexture("Mage_4");
-
 							_directionx = 1;
 							_directiony = 0;
 							isRight = true;
+							heroArt.setFrameTexture(0, Assets.getAtlas().getTexture("Mageright0"));
+							heroArt.setFrameTexture(1, Assets.getAtlas().getTexture("Mageright1"));
+							heroArt.setFrameTexture(2, Assets.getAtlas().getTexture("Mageright2"));
+							heroArt.setFrameTexture(3, Assets.getAtlas().getTexture("Mageright3"));
+							heroArt.setFrameTexture(4, Assets.getAtlas().getTexture("Mageright4"));
+							heroArt.setFrameTexture(5, Assets.getAtlas().getTexture("Mageright5"));
+							heroArt.setFrameTexture(6, Assets.getAtlas().getTexture("Mageright6"));
+							heroArt.setFrameTexture(7,Assets.getAtlas().getTexture("Mageright7"));
 							}
 						}
 					}
