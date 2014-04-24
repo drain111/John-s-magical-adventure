@@ -32,16 +32,16 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\Juego\src</path-element>
-      <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\Hi-ReS-Stats-master\src</path-element>
-      <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\PrimaryFeather-Starling-Framework-1a50854\starling\src</path-element>
-      <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\greensock-as3</path-element>
-      <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\Starling-Extension-Particle-System-master\src</path-element>
+      <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\Juego\src</path-element>
+      <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\Hi-ReS-Stats-master\src</path-element>
+      <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\PrimaryFeather-Starling-Framework-1a50854\starling\src</path-element>
+      <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\greensock-as3</path-element>
+      <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\Starling-Extension-Particle-System-master\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Drain111\Documents\GitHub\John-s-magical-adventure\Juego\src\Main.as</path-element>
+    <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\Juego\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>60</default-frame-rate>
