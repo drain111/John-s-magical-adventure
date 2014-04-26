@@ -178,11 +178,11 @@ package objects
 					break;
 				case 3:
 					this._layerName = "objectsAndWalls";
-					this._lastIndexImage = 7;
+					this._lastIndexImage = 10;
 					break;
 				case 4:
 					this._layerName = "objectsAndWalls";
-					this._lastIndexImage = 7;
+					this._lastIndexImage = 10;
 					break;
 				case 5:
 					this._layerName = "trees";
@@ -190,7 +190,7 @@ package objects
 					break;
 				case 6:
 					this._layerName = "ceilings";
-					this._lastIndexImage = 9;
+					this._lastIndexImage = 10;
 					break;
 				default:
 					this._layerName = "terrain";

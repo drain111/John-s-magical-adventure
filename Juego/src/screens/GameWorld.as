@@ -137,13 +137,7 @@ package screens
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
-			var string:String = backgroundMap[0].terrainMap.join();
-			var file:FileReference = new FileReference;
-			var xml:XML = < data/>;
-			xml.datos = string;
-		    
-			file.save(xml);
-			file.addEventListener(Event.CLOSE, close );
+			
 
 		}
 		
@@ -331,9 +325,52 @@ package screens
 		
 		public function attack(e:KeyboardEvent):void
 		{
+				var file:FileReference = new FileReference;
+				var xml:XML = < data/>;
+			if (e.keyCode == Keyboard.Y) 
+			{
+				var string:String;
+
+		    
+				
+				
+				
+				string = backgroundMap[0].terrainMap.join();
+				xml.backgroundMap += string;
+				
+				
+				
+				
+				
+				file.save(xml);
+				file.addEventListener(Event.CLOSE, close );
+			}
+			if (e.keyCode == Keyboard.U) {
+				
+				file.browse();
+				file.addEventListener(Event.COMPLETE, onloaded);
+				
+				
+	
+				
+				
+			}
 		
-			
+		}
 		
+		private function onloaded(e:Event):void 
+		{
+			file.load();
+			var file:FileReference = new FileReference;
+			var xml:XML = < data/>;
+			var backup:Vector.<GameBackground> = new Vector.<GameBackground>;
+
+				var string:String = xml.backgroundMap;
+				for (var i:int = 0; i < string.length; i++) 
+				{
+					backup[0].terrainMap[0] = parseInt(string);
+					backgroundMap[0] = backup[0];
+				}
 		}
 		
 		public function createMagicParticles():void {

@@ -253,6 +253,11 @@
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb2.png</filename>
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb1.png</filename>
             <filename>../../../../../Desktop/desarrollodejuegosenweb/Magestb0.png</filename>
+            <filename>objectsAndWalls_8.png</filename>
+            <filename>objectsAndWalls_9.png</filename>
+            <filename>objectsAndWalls_10.png</filename>
+            <filename>ceilings_10.png</filename>
+            <filename>hitbox.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
