@@ -76,7 +76,7 @@ package screens
 		
 		private var onloop:Boolean = false;
 		
-		private var maxloops:int = 500;
+		private var maxloops:int = 200;
 	
 		[Embed(source = "../../assets/map/map.xml", mimeType = "application/octet-stream")]
 		public static const MapXmlClass:Class;
@@ -405,8 +405,12 @@ package screens
 			var stringroads:String = "";
 			onloop = true;
 			var actualoops:int = 0;
+			
 			for (var j:int = savedj; j <backgroundMap.length;j++) 
 			{
+				var k:int = 0;
+				var l:int = 0;
+				var m:int = 0;
 				this.addChild(backgroundMap[j]);
 				this.addChild(foregroundMap[j]);
 				stringterrain = xml.backgroundmap.(@id == j).terrainMap;
@@ -415,12 +419,39 @@ package screens
 			
 				for (var i:int = 0;i < backgroundMap[0].terrainMap.length ; i++) 
 				{
-					backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(2 * i));
-					backgroundMap[j].roadsMap[i] = Number(stringobjectswalls.charAt(2 * i));
-					backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(2 * i));
+					if (stringobjectswalls.charAt(k) == ",") k++;
+					if (stringroads.charAt(l) == ",") l++;
+					if (stringterrain.charAt(m) == ",") m++;
+					if (stringobjectswalls.charAt(k+1) == ",")
+					backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
+					else{ backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
+					k++
+					}
+					if (stringroads.charAt(l+1) == ",")
+					backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l));
+					else { 
+						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
+						l++
+					}
+					if (stringterrain.charAt(m+1) == ",")
+					backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
+					else {
+						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
+						m++
+					}
+					k++;
+					l++;
+					m++;
 					
-
 				}
+				backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
+				backgroundMap[j].roadsLayer.matrix = backgroundMap[j].roadsMap;
+				backgroundMap[j].terrainLayer.matrix = backgroundMap[j].terrainMap;
+				
+				backgroundMap[j].objectsAndWallsLayer.selectLayerTiles();
+				backgroundMap[j].roadsLayer.selectLayerTiles();
+				backgroundMap[j].terrainLayer.selectLayerTiles();
+				
 				
 				actualoops++;
 				this.removeChild(backgroundMap[j]);
@@ -430,9 +461,11 @@ package screens
 					return;
 				}
 				
+				
 			}
+			savedj = 0;
+			actualoops = 0;
 			onloop = false;
-			slime.x = 500;
 			reloadMaps()
 			
 				

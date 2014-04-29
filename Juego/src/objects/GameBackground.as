@@ -124,5 +124,35 @@ package objects
 		{
 			_objectsAndWallsMap = value;
 		}
+		
+		public function get terrainLayer():BgLayer 
+		{
+			return _terrainLayer;
+		}
+		
+		public function set terrainLayer(value:BgLayer):void 
+		{
+			_terrainLayer = value;
+		}
+		
+		public function get roadsLayer():BgLayer 
+		{
+			return _roadsLayer;
+		}
+		
+		public function set roadsLayer(value:BgLayer):void 
+		{
+			_roadsLayer = value;
+		}
+		
+		public function get objectsAndWallsLayer():BgLayer 
+		{
+			return _objectsAndWallsLayer;
+		}
+		
+		public function set objectsAndWallsLayer(value:BgLayer):void 
+		{
+			_objectsAndWallsLayer = value;
+		}
 	}
 }

@@ -55,6 +55,14 @@ package objects
 		private function onAddedToStage(event:Event):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
+			selectLayerTiles();
+			
+			this.addEventListener(Event.ENTER_FRAME, refreshMap);
+			this.addEventListener(Event.ENTER_FRAME, sendTrace);
+		}	
+		
+		public function selectLayerTiles():void
+		{
 			var cont:int = 0;
 			
 			var actualRow:int = 0;
@@ -78,8 +86,7 @@ package objects
 				}
 			}
 			
-			this.addEventListener(Event.ENTER_FRAME, refreshMap);
-			this.addEventListener(Event.ENTER_FRAME, sendTrace);
+			
 		}
 		
 		private function drawTile(numTile:int, index:int, row:int, column:int, dim:int):void {
@@ -146,6 +153,16 @@ package objects
 			{
 				this._tiles[i].visible = false;
 			}
+		}
+		
+		public function get matrix():Array 
+		{
+			return _matrix;
+		}
+		
+		public function set matrix(value:Array):void 
+		{
+			_matrix = value;
 		}
 	}
 }
