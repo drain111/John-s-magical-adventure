@@ -104,5 +104,25 @@ package objects
 		{
 			_terrainMap = value;
 		}
+		
+		public function get roadsMap():Array 
+		{
+			return _roadsMap;
+		}
+		
+		public function set roadsMap(value:Array):void 
+		{
+			_roadsMap = value;
+		}
+		
+		public function get objectsAndWallsMap():Array 
+		{
+			return _objectsAndWallsMap;
+		}
+		
+		public function set objectsAndWallsMap(value:Array):void 
+		{
+			_objectsAndWallsMap = value;
+		}
 	}
 }

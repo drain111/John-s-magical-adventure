@@ -1,0 +1,5 @@
+<inventory>
+  <product id="111" price="2999.99">Laptop</product>
+  <product id="222" price="49.99">Mouse</product>
+  <product id="333" price="199.99">Phone</product>
+</inventory>

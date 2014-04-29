@@ -1,7 +1,9 @@
 package screens 
 {
+	import flash.display.Loader;
 	import flash.events.IOErrorEvent;
 	import flash.geom.Rectangle;
+	import flash.utils.ByteArray;
 	import objects.Player;
 	import flash.geom.Point;
 	import objects.Camera;
@@ -64,6 +66,20 @@ package screens
 		
 		private var slime:Monster;
 		
+		private var file:FileReference = new FileReference;
+		
+		private var xml:XML = < data/>;
+
+		private var savedi:int = 0;
+		
+		private var savedj:int = 0;
+		
+		private var onloop:Boolean = false;
+		
+		private var maxloops:int = 500;
+	
+		[Embed(source = "../../assets/map/map.xml", mimeType = "application/octet-stream")]
+		public static const MapXmlClass:Class;
 
 		
 
@@ -186,6 +202,8 @@ package screens
 			/*-----------*/	
 
 			if (slime.health <= 0) this.removeChild(slime);
+			
+			if (onloop == true) loadxml();
 		}
 		
 		/*Editado hoy*/
@@ -325,53 +343,101 @@ package screens
 		
 		public function attack(e:KeyboardEvent):void
 		{
-				var file:FileReference = new FileReference;
-				var xml:XML = < data/>;
 			if (e.keyCode == Keyboard.Y) 
 			{
-				var string:String;
-
-		    
+				
+				
+				for (var j:int = 0; j < backgroundMap.length ; j++) 
+				{
+					this.addChild(backgroundMap[j]);
+				xml.appendChild(<backgroundmap id = {j}><terrainMap>{backgroundMap[j].terrainMap.join()}</terrainMap><roadsMap>{backgroundMap[j].roadsMap.join()}</roadsMap><objectsandwallsmap>{backgroundMap[j].objectsAndWallsMap.join()}</objectsandwallsmap></backgroundmap>);
+				this.removeChild(backgroundMap[j]);
+				
+				}
+				reloadMaps();
 				
 				
 				
-				string = backgroundMap[0].terrainMap.join();
-				xml.backgroundMap += string;
 				
 				
 				
+			}
+			if (e.keyCode == Keyboard.H) {
+				for (var j:int = 0; j < backgroundMap.length ; j++) 
+				{
+					
+				this.addChild(foregroundMap[j]);
+				xml.appendChild(<foregroundmap id = {j}><objectsmap>{foregroundMap[j].objectsMap.join()}</objectsmap><treesMap>{foregroundMap[j].treesMap.join()}</treesMap><ceilingsMap>{foregroundMap[j].ceilingsMap.join()}</ceilingsMap></foregroundmap>);
+				this.removeChild(foregroundMap[j]);
 				
-				
+				}
+			}
+			if (e.keyCode == Keyboard.J) 
+			{
 				file.save(xml);
 				file.addEventListener(Event.CLOSE, close );
 			}
 			if (e.keyCode == Keyboard.U) {
-				
-				file.browse();
-				file.addEventListener(Event.COMPLETE, onloaded);
-				
+			
+				loadxml();
+
+				// once that data is loaded, the event will be passed to the do_XML function
 				
 	
 				
 				
 			}
-		
+			
 		}
 		
-		private function onloaded(e:Event):void 
+		private function loadxml():void 
 		{
-			file.load();
-			var file:FileReference = new FileReference;
-			var xml:XML = < data/>;
-			var backup:Vector.<GameBackground> = new Vector.<GameBackground>;
-
-				var string:String = xml.backgroundMap;
-				for (var i:int = 0; i < string.length; i++) 
-				{
-					backup[0].terrainMap[0] = parseInt(string);
-					backgroundMap[0] = backup[0];
-				}
+			var xml_Loader:URLLoader = new URLLoader();
+			xml_Loader.load(new URLRequest("../assets/map/map.xml"));
+			xml_Loader.addEventListener(flash.events.Event.COMPLETE, doXML);
 		}
+		public function doXML(e:flash.events.Event):void {
+			this.removeEventListener(flash.events.Event.COMPLETE, doXML);
+			// data sits in the event's target (aka the load)'s data
+			xml = new XML(e.target.data);
+			var stringterrain:String = "";
+			var stringobjectswalls:String = "";
+			var stringroads:String = "";
+			onloop = true;
+			var actualoops:int = 0;
+			for (var j:int = savedj; j <backgroundMap.length;j++) 
+			{
+				this.addChild(backgroundMap[j]);
+				this.addChild(foregroundMap[j]);
+				stringterrain = xml.backgroundmap.(@id == j).terrainMap;
+				stringobjectswalls = xml.backgroundmap.(@id == j).objectsandwallsmap;
+				stringroads = xml.backgroundmap.(@id == j).roadsMap;
+			
+				for (var i:int = 0;i < backgroundMap[0].terrainMap.length ; i++) 
+				{
+					backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(2 * i));
+					backgroundMap[j].roadsMap[i] = Number(stringobjectswalls.charAt(2 * i));
+					backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(2 * i));
+					
+
+				}
+				
+				actualoops++;
+				this.removeChild(backgroundMap[j]);
+				this.removeChild(foregroundMap[j]);
+				if (actualoops == maxloops) {
+					savedj = j;
+					return;
+				}
+				
+			}
+			onloop = false;
+			slime.x = 500;
+			reloadMaps()
+			
+				
+		}
+		
 		
 		public function createMagicParticles():void {
 			

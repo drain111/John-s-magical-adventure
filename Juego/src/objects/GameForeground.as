@@ -95,5 +95,35 @@ package objects
 		{
 			_editor = value;
 		}
+		
+		public function get objectsMap():Array 
+		{
+			return _objectsMap;
+		}
+		
+		public function set objectsMap(value:Array):void 
+		{
+			_objectsMap = value;
+		}
+		
+		public function get treesMap():Array 
+		{
+			return _treesMap;
+		}
+		
+		public function set treesMap(value:Array):void 
+		{
+			_treesMap = value;
+		}
+		
+		public function get ceilingsMap():Array 
+		{
+			return _ceilingsMap;
+		}
+		
+		public function set ceilingsMap(value:Array):void 
+		{
+			_ceilingsMap = value;
+		}
 	}
 }

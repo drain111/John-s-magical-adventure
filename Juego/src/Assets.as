@@ -27,6 +27,8 @@ package
 		[Embed(source = "../assets/graphics/myspritesheet.xml", mimeType = "application/octet-stream")]
 		public static const AtlasXmlGame:Class;
 		
+		
+		
 		/*[Embed(source = "../assets/graphics/magonspritesheet.png")]
 		public static const MagonTextureGame:Class;
 		
