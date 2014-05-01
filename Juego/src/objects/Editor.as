@@ -87,8 +87,8 @@ package objects
 		}
 		
 		private function update():void {
-			this._image.x = _realXpos;
-			this._image.y = _realYpos;
+			this.x = _realXpos;
+			this.y = _realYpos;
 			
 			if (this._tileSelected != this._lastTileSelected) 
 			{
