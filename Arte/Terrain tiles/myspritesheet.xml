@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:afa02ff7fd803fd0490e52f5954d4164:56aaa8bff3aeddb2e66a3a1a303c6379:34dd15f328e3b24bd15123c5f7094c28$ -->
+<!-- $TexturePacker:SmartUpdate:94d1e765ed157034bffc055cb9d6d718:99304479f5acca04a711098e7583fc76:34dd15f328e3b24bd15123c5f7094c28$ -->
 <TextureAtlas imagePath="myspritesheet.png">
     <SubTexture name="Mage_1" x="2" y="2" width="32" height="64"/>
     <SubTexture name="Mage_2" x="35" y="2" width="32" height="64"/>

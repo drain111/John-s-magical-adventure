@@ -13,7 +13,7 @@ package
 		public static var posCameraY:Number = 0;
 		
 		public static var LOADED_WORLD:Boolean = false;
-		
+
 		public static const TILE_DIMENSIONS:int = 36;
 		
 		public static const ROWS:int = 500 / TILE_DIMENSIONS + 1;
