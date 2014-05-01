@@ -142,11 +142,6 @@ package screens
 			
 		}
 		
-		//Don't touch this, it's for the XML
-		private function close(e:Event):void 
-		{
-			
-		}
 		
 		//Update method.
 		private function update(e:Event):void 
@@ -368,9 +363,10 @@ package screens
 					this.removeChild(foregroundMap[j]);
 				
 				}
-				
-				file.save(xml);
-				file.addEventListener(Event.CLOSE, close);
+				file.addEventListener(Event.COMPLETE, saveCompleteHandler);
+				file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
+				file.save(xml, "map.xml");
+
 			}
 			
 			//If U is pressed, load the XML with the maps
@@ -384,6 +380,24 @@ package screens
 				
 			}
 			
+		}
+		//In case of an error, this happens (full disk, no permissions,...)
+		private function saveIOErrorHandler(e:IOErrorEvent):void 
+		{
+			this.removeEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
+			try {
+				
+			}
+			catch (e){
+				trace("IOERROR")
+			}
+
+		}
+		//When it's saved, this is triggered
+		private function saveCompleteHandler(e:Event):void 
+		{
+			this.removeEventListener(Event.COMPLETE, saveCompleteHandler);
+			trace("completed");
 		}
 		
 		private function loadxml():void 
@@ -437,32 +451,32 @@ package screens
 					if (stringterrain.charAt(m) == ",") m++;
 					
 					if (stringobjectswalls.charAt(k+1) == "," || k+1 >= stringobjectswalls.length){
-						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k));
+						backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(k));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = Number(stringobjectswalls.charAt(k));
 					}
 					else { 
-						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
+						backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(k)) * 10 + Number(stringobjectswalls.charAt(k + 1));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = Number(stringobjectswalls.charAt(k)) * 10 + Number(stringobjectswalls.charAt(k + 1));
 						k++
 					}
 					
 					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length){
-						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l));
-						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l));
+						backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l));
+						backgroundMap[j].roadsLayer.matrix[i] = Number(stringroads.charAt(l));
 					}
 					else { 
-						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
-						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
+						backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l)) * 10 + Number(stringroads.charAt(l + 1));
+						backgroundMap[j].roadsLayer.matrix[i] = Number(stringroads.charAt(l)) * 10 + Number(stringroads.charAt(l + 1));
 						l++
 					}
 					
 					if (stringterrain.charAt(m+1) == "," || m+1 >= stringterrain.length){
-						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
-						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m));
+						backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(m));
+						backgroundMap[j].terrainLayer.matrix[i] = Number(stringterrain.charAt(m));
 					}
 					else {
-						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
-						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
+						backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(m)) * 10 + Number(stringterrain.charAt(m + 1));
+						backgroundMap[j].terrainLayer.matrix[i] = Number(stringterrain.charAt(m)) * 10 + Number(stringterrain.charAt(m + 1));
 						m++
 					}
 					
