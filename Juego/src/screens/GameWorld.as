@@ -170,7 +170,16 @@ package screens
 				if(player.obtainactualspell() != 3)
 					createMagicParticles();
 			}
-			
+			if (e.keyCode == Keyboard.U) {
+				
+				if(!GlobalVariables.LOADED_WORLD) loadxml();
+
+				// once that data is loaded, the event will be passed to the do_XML function
+				
+	
+				
+				
+			}
 		}
 		
 	
@@ -203,7 +212,7 @@ package screens
 
 			if (slime.health <= 0) this.removeChild(slime);
 			
-			if (onloop == true) loadxml();
+			if (onloop == true && !GlobalVariables.LOADED_WORLD) loadxml();
 		}
 		
 		/*Editado hoy*/
@@ -377,16 +386,7 @@ package screens
 				file.save(xml);
 				file.addEventListener(Event.CLOSE, close );
 			}
-			if (e.keyCode == Keyboard.U) {
 			
-				loadxml();
-
-				// once that data is loaded, the event will be passed to the do_XML function
-				
-	
-				
-				
-			}
 			
 		}
 		
@@ -397,7 +397,6 @@ package screens
 			xml_Loader.addEventListener(flash.events.Event.COMPLETE, doXML);
 		}
 		public function doXML(e:flash.events.Event):void {
-			this.removeEventListener(flash.events.Event.COMPLETE, doXML);
 			// data sits in the event's target (aka the load)'s data
 			xml = new XML(e.target.data);
 			var stringterrain:String = "";
@@ -422,18 +421,18 @@ package screens
 					if (stringobjectswalls.charAt(k) == ",") k++;
 					if (stringroads.charAt(l) == ",") l++;
 					if (stringterrain.charAt(m) == ",") m++;
-					if (stringobjectswalls.charAt(k+1) == ",")
+					if (stringobjectswalls.charAt(k+1) == "," || l+1 >= stringobjectswalls.length)
 					backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
 					else{ backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
 					k++
 					}
-					if (stringroads.charAt(l+1) == ",")
+					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length)
 					backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l));
 					else { 
 						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
 						l++
 					}
-					if (stringterrain.charAt(m+1) == ",")
+					if (stringterrain.charAt(m+1) == "," || l+1 >= stringterrain.length)
 					backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
 					else {
 						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
@@ -442,6 +441,8 @@ package screens
 					k++;
 					l++;
 					m++;
+					actualoops++;
+
 					
 				}
 				backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
@@ -453,20 +454,22 @@ package screens
 				backgroundMap[j].terrainLayer.selectLayerTiles();
 				
 				
-				actualoops++;
 				this.removeChild(backgroundMap[j]);
 				this.removeChild(foregroundMap[j]);
-				if (actualoops == maxloops) {
+				if (actualoops >= maxloops) {
 					savedj = j;
 					return;
 				}
-				
+				this.removeEventListener(flash.events.Event.COMPLETE, doXML);
+
 				
 			}
 			savedj = 0;
 			actualoops = 0;
 			onloop = false;
-			reloadMaps()
+			slime.x = 500;
+			GlobalVariables.LOADED_WORLD = true;
+			reloadMaps();
 			
 				
 		}

@@ -11,6 +11,8 @@ package
 		
 		public static var posCameraX:Number = 0;
 		public static var posCameraY:Number = 0;
+		
+		public static var LOADED_WORLD:Boolean = false;
 
 		public static const TILE_DIMENSIONS:int = 36;
 		
