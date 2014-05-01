@@ -323,26 +323,15 @@ package screens
 					createMagicParticles();
 			}
 			
+			
+			
+
+			
 		}
 		
 		//Keys method
 		public function keys(e:KeyboardEvent):void
 		{
-			//If Y is pressed, creates the xml file for the backgrounds.
-			if (e.keyCode == Keyboard.Y) 
-			{
-				
-				
-				for (var j:int = 0; j < backgroundMap.length ; j++) 
-				{
-					this.addChild(backgroundMap[j]);
-					xml.appendChild(<backgroundmap id = {j}><terrainMap>{backgroundMap[j].terrainMap.join()}</terrainMap><roadsMap>{backgroundMap[j].roadsMap.join()}</roadsMap><objectsandwallsmap>{backgroundMap[j].objectsAndWallsMap.join()}</objectsandwallsmap></backgroundmap>);
-					this.removeChild(backgroundMap[j]);
-				}
-				
-				reloadMaps();
-				
-			}
 			
 			//If J is pressed, creates the xml file for the foregrounds and saves the file in disk.
 			if (e.keyCode == Keyboard.J) 
@@ -367,9 +356,7 @@ package screens
 				file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
 				file.save(xml, "map.xml");
 				reloadMaps();
-
 			}
-			
 			//If U is pressed, load the XML with the maps
 			if (e.keyCode == Keyboard.U) {
 				
@@ -439,9 +426,9 @@ package screens
 				this.addChild(backgroundMap[j]);
 				this.addChild(foregroundMap[j]);
 				
-				stringterrain = xml2.backgroundmap.(@id == j).terrainMap;
-				stringobjectswalls = xml2.backgroundmap.(@id == j).objectsandwallsmap;
-				stringroads = xml2.backgroundmap.(@id == j).roadsMap;
+				stringterrain = xml2.backgroundmap.(@id == j).terrainMap.text();
+				stringobjectswalls = xml2.backgroundmap.(@id == j).objectsandwallsmap.text();
+				stringroads = xml2.backgroundmap.(@id == j).roadsMap.text();
 			
 				//The second one has to copy the information from the XML to the sectors
 				for (var i:int = 0;i < backgroundMap[0].terrainMap.length ; i++) 
@@ -452,32 +439,32 @@ package screens
 					if (stringterrain.charAt(m) == ",") m++;
 					
 					if (stringobjectswalls.charAt(k+1) == "," || k+1 >= stringobjectswalls.length){
-						backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(k));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = Number(stringobjectswalls.charAt(k));
+						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k));
 					}
 					else { 
-						backgroundMap[j].objectsAndWallsMap[i] = Number(stringobjectswalls.charAt(k)) * 10 + Number(stringobjectswalls.charAt(k + 1));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = Number(stringobjectswalls.charAt(k)) * 10 + Number(stringobjectswalls.charAt(k + 1));
+						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
 						k++
 					}
 					
 					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length){
-						backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l));
-						backgroundMap[j].roadsLayer.matrix[i] = Number(stringroads.charAt(l));
+						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l));
+						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l));
 					}
 					else { 
-						backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l)) * 10 + Number(stringroads.charAt(l + 1));
-						backgroundMap[j].roadsLayer.matrix[i] = Number(stringroads.charAt(l)) * 10 + Number(stringroads.charAt(l + 1));
+						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
+						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
 						l++
 					}
 					
 					if (stringterrain.charAt(m+1) == "," || m+1 >= stringterrain.length){
-						backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(m));
-						backgroundMap[j].terrainLayer.matrix[i] = Number(stringterrain.charAt(m));
+						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
+						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m));
 					}
 					else {
-						backgroundMap[j].terrainMap[i] = Number(stringterrain.charAt(m)) * 10 + Number(stringterrain.charAt(m + 1));
-						backgroundMap[j].terrainLayer.matrix[i] = Number(stringterrain.charAt(m)) * 10 + Number(stringterrain.charAt(m + 1));
+						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
+						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
 						m++
 					}
 					
