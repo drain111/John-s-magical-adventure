@@ -40,25 +40,22 @@ package screens
 	 */
 	public class GameWorld extends Sprite 
 	{
+		/*-----VARIABLES------*/
 		public var attacking:Boolean;
+		
 		private var backgroundMap:Vector.<GameBackground>;
 		private var foregroundMap:Vector.<GameForeground>;
-		/*Editado hoy*/
 		private var loadedBackgroundMaps:Vector.<GameBackground>;
 		private var loadedForegroundMaps:Vector.<GameForeground>;
-		/*-----------*/
+		
 		private var XSectors:int;
 		private var YSectors:int;
 		private var camera:Camera;
 		
-		
 		private var editor:Editor;
 		private var lastSector:Point;
 		
-		/* trial */
-
 		private var particle:PDParticleSystem;
-		
 		
 		private var player:Player;
 		
@@ -69,22 +66,12 @@ package screens
 		private var file:FileReference = new FileReference;
 		
 		private var xml:XML = < data/>;
-
-		private var savedi:int = 0;
 		
 		private var savedj:int = 0;
 		
 		private var onloop:Boolean = false;
 		
-		private var maxloops:int = 200;
-	
-		[Embed(source = "../../assets/map/map.xml", mimeType = "application/octet-stream")]
-		public static const MapXmlClass:Class;
-
-		
-
-
-		
+		/*-----INITIALIZE-----*/
 		public function GameWorld() 
 		{
 			super();
@@ -101,29 +88,29 @@ package screens
 			drawGame();
 		}
 		
-		
+		/*-----CONSTRUCTOR-----*/
 		private function drawGame():void {
+			//Initialize the vectors of all the sectors
 			backgroundMap = new Vector.<GameBackground>;
 			foregroundMap = new Vector.<GameForeground>;
 			
-			/*Editado hoy*/
+			//Initialize the vectors of the displayed sectors
 			loadedBackgroundMaps = new Vector.<GameBackground>;
 			loadedForegroundMaps = new Vector.<GameForeground>;
-			/*-----------*/
 			
+			//Creates the editor
 			editor = new Editor( GlobalVariables.ROWS, GlobalVariables.COLUMNS, XSectors, YSectors);
 			
-			/*Editado hoy*/
+			//Creates the point which will indicate in which sector is the editor or the player
 			lastSector = new Point(editor.actualXSector, editor.actualYSector);
-			/*-----------*/
 			
+			//Creates the initial world and displays the editor
 			createBackgroundMap(backgroundMap, XSectors, YSectors, editor);
 			this.addChild(editor);
 			createForegroundMap(foregroundMap, XSectors, YSectors, editor);
 			
 			
-			/* todo */
-			
+			//Initializes the particles
 			var particles:PDParticleSystem = new PDParticleSystem(XML(new AssetsParticles.ParticleXML()), Texture.fromBitmap(new AssetsParticles.Particle1Texture()));
 			Starling.juggler.add(particle);
 			particles.x = -100;
@@ -138,7 +125,7 @@ package screens
 			//Create the player, camera and slime
 			player = new Player();
 			this.addChild(player);
-			this.camera = new Camera(player);
+			this.camera = new Camera(editor);
 			this.addChild(camera);
 			slime = new Monster();
 			slime.x = 40;
@@ -148,42 +135,20 @@ package screens
 			//Load maps for the first time.
 			reloadMaps();
 			
-			this.addEventListener(KeyboardEvent.KEY_DOWN, attack);
+			this.addEventListener(KeyboardEvent.KEY_DOWN, keys);
 			this.addEventListener(KeyboardEvent.KEY_UP, release);
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 			
-			
-
 		}
 		
+		//Don't touch this, it's for the XML
 		private function close(e:Event):void 
 		{
 			
 		}
 		
-		
-		private function release(e:KeyboardEvent):void 
-		{
-			if (e.keyCode == Keyboard.B)
-			{
-				if(player.obtainactualspell() != 3)
-					createMagicParticles();
-			}
-			if (e.keyCode == Keyboard.U) {
-				
-				if(!GlobalVariables.LOADED_WORLD) loadxml();
-
-				// once that data is loaded, the event will be passed to the do_XML function
-				
-	
-				
-				
-			}
-		}
-		
-	
-		
+		//Update method.
 		private function update(e:Event):void 
 		{
 			//Update camera
@@ -193,31 +158,31 @@ package screens
 			//Animate particles.
 			animatemagicParticles();
 			
-		
+			/*TODO*/
 			if (attacking) {
 				
 			}
-		
+			/*----*/
+			
 			//Check sector.
 			var actualSector:Point = new Point(editor.actualXSector, editor.actualYSector);
 			if (actualSector.x != lastSector.x || actualSector.y != lastSector.y){
 				lastSector = actualSector;
 				reloadMaps();
-				
 			}
 			
-			
-
-			/*-----------*/	
-
+			//Remove the enemy if it dies.
 			if (slime.health <= 0) this.removeChild(slime);
 			
 			if (onloop == true && !GlobalVariables.LOADED_WORLD) loadxml();
 		}
 		
-		/*Editado hoy*/
+		/*-----RELOAD MAPS METHOD-----*/
+		/* If the player moves from one sector to another, this 
+		 * shows the sector where the player is. */
 		private function reloadMaps():void 
 		{
+			//Removes the actual loaded sectors, the editor, the player and the enemies.
 			if (loadedBackgroundMaps.length > 0) 
 			{
 				removeBackground();
@@ -228,6 +193,7 @@ package screens
 				//this.removeChild(camera);
 			}
 			
+			//Selects the sectors to load.
 			var sectors:Vector.<int> = new Vector.<int>;
 			sectors.push(returnSectorIndex(lastSector.x - 1, lastSector.y - 1));
 			sectors.push(returnSectorIndex(lastSector.x, lastSector.y - 1));
@@ -239,39 +205,36 @@ package screens
 			sectors.push(returnSectorIndex(lastSector.x, lastSector.y + 1));
 			sectors.push(returnSectorIndex(lastSector.x + 1, lastSector.y + 1));
 			
+			//Add the new sectors to the vectors.
 			for (var i:int = 0; i < sectors.length; i++) 
 			{
 				loadedBackgroundMaps.push(backgroundMap[sectors[i]]);
 				loadedForegroundMaps.push(foregroundMap[sectors[i]]);
 			}
+			
+			//Add first the backgrounds
 			for (var j:int = 0; j < loadedBackgroundMaps.length; j++) 
 			{
 				this.addChild(loadedBackgroundMaps[j]);
 			}
 			
+			//Add the player and enemies.
 			this.addChild(player);
 
 			this.addChild(slime);
 			
+			//Finally add the foregrounds
 			for (var k:int = 0; k < loadedForegroundMaps.length; k++) 
 			{
 				this.addChild(loadedForegroundMaps[k]);
 			}
 
-			
+			//This adds the editor, only used for editing the world.
 			this.addChild(editor);
 			
-			//this.addChild(camera);
 		}
 		
-		public function removeForeground():void {
-			for (var i:int = 0; i <loadedForegroundMaps.length; i++) 
-			{
-				this.removeChild(loadedForegroundMaps[i]);
-			}
-			loadedForegroundMaps.splice(0, loadedForegroundMaps.length);
-		}
-		
+		//Remove the loaded backgrounds
 		public function removeBackground():void {
 			for (var i:int = 0; i <loadedBackgroundMaps.length; i++) 
 			{
@@ -280,6 +243,16 @@ package screens
 			loadedBackgroundMaps.splice(0, loadedBackgroundMaps.length);
 		}
 		
+		//Remove the loaded foregrounds
+		public function removeForeground():void {
+			for (var i:int = 0; i <loadedForegroundMaps.length; i++) 
+			{
+				this.removeChild(loadedForegroundMaps[i]);
+			}
+			loadedForegroundMaps.splice(0, loadedForegroundMaps.length);
+		}
+		
+		//Returns sector = (0,3) -> index = 3
 		private function returnSectorIndex(x:int, y:int):int {
 			var XToCalculate:int;
 			var YToCalculate:int;
@@ -294,20 +267,17 @@ package screens
 			
 			return XSectors * XToCalculate + YToCalculate;
 		}
-		/*-----------*/
+		
 		
 		public function initialize():void {
 			this.visible = true;
-			
-
 		}
-		
-		
 		
 		public function disposeTemporarily():void {
 			this.visible = false;
 		}
 		
+		//Creates the vector of backgrounds.
 		public function createBackgroundMap(map:Vector.<GameBackground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
 			
 			var cont:int = 0;
@@ -320,7 +290,6 @@ package screens
 				while (contY < numberYSectors) 
 				{
 					map.push(new GameBackground(contX, contY, editor));
-					//this.addChild(map[cont]);
 					contY++;
 					cont++;
 				}
@@ -329,6 +298,7 @@ package screens
 			
 		}
 		
+		//Creates the vector of foregrounds.
 		public function createForegroundMap(map:Vector.<GameForeground>,numXSectors:int, numberYSectors:int, editor:Editor):void {
 			
 			var cont:int = 0;
@@ -349,9 +319,21 @@ package screens
 			}
 		}
 		
-		
-		public function attack(e:KeyboardEvent):void
+		//When the player releases the key, attack.
+		private function release(e:KeyboardEvent):void 
 		{
+			if (e.keyCode == Keyboard.B)
+			{
+				if(player.obtainactualspell() != 3)
+					createMagicParticles();
+			}
+			
+		}
+		
+		//Keys method
+		public function keys(e:KeyboardEvent):void
+		{
+			//If Y is pressed, creates the xml file for the backgrounds.
 			if (e.keyCode == Keyboard.Y) 
 			{
 				
@@ -359,34 +341,48 @@ package screens
 				for (var j:int = 0; j < backgroundMap.length ; j++) 
 				{
 					this.addChild(backgroundMap[j]);
-				xml.appendChild(<backgroundmap id = {j}><terrainMap>{backgroundMap[j].terrainMap.join()}</terrainMap><roadsMap>{backgroundMap[j].roadsMap.join()}</roadsMap><objectsandwallsmap>{backgroundMap[j].objectsAndWallsMap.join()}</objectsandwallsmap></backgroundmap>);
-				this.removeChild(backgroundMap[j]);
-				
+					xml.appendChild(<backgroundmap id = {j}><terrainMap>{backgroundMap[j].terrainMap.join()}</terrainMap><roadsMap>{backgroundMap[j].roadsMap.join()}</roadsMap><objectsandwallsmap>{backgroundMap[j].objectsAndWallsMap.join()}</objectsandwallsmap></backgroundmap>);
+					this.removeChild(backgroundMap[j]);
 				}
+				
 				reloadMaps();
 				
-				
-				
-				
-				
-				
-			}
-			if (e.keyCode == Keyboard.H) {
-				for (var j:int = 0; j < backgroundMap.length ; j++) 
-				{
-					
-				this.addChild(foregroundMap[j]);
-				xml.appendChild(<foregroundmap id = {j}><objectsmap>{foregroundMap[j].objectsMap.join()}</objectsmap><treesMap>{foregroundMap[j].treesMap.join()}</treesMap><ceilingsMap>{foregroundMap[j].ceilingsMap.join()}</ceilingsMap></foregroundmap>);
-				this.removeChild(foregroundMap[j]);
-				
-				}
-			}
-			if (e.keyCode == Keyboard.J) 
-			{
-				file.save(xml);
-				file.addEventListener(Event.CLOSE, close );
 			}
 			
+			//If J is pressed, creates the xml file for the foregrounds and saves the file in disk.
+			if (e.keyCode == Keyboard.J) 
+			{
+				
+				for (var j:int = 0; j < backgroundMap.length ; j++) 
+				{
+					this.addChild(backgroundMap[j]);
+					xml.appendChild(<backgroundmap id = {j}><terrainMap>{backgroundMap[j].terrainLayer.matrix.join()}</terrainMap><roadsMap>{backgroundMap[j].roadsLayer.matrix.join()}</roadsMap><objectsandwallsmap>{backgroundMap[j].objectsAndWallsLayer.matrix.join()}</objectsandwallsmap></backgroundmap>);
+					this.removeChild(backgroundMap[j]);
+				}
+				
+				for (var j:int = 0; j < backgroundMap.length ; j++) 
+				{
+				
+					this.addChild(foregroundMap[j]);
+					xml.appendChild(<foregroundmap id = {j}><objectsmap>{foregroundMap[j].objectsMap.join()}</objectsmap><treesMap>{foregroundMap[j].treesMap.join()}</treesMap><ceilingsMap>{foregroundMap[j].ceilingsMap.join()}</ceilingsMap></foregroundmap>);
+					this.removeChild(foregroundMap[j]);
+				
+				}
+				
+				file.save(xml);
+				file.addEventListener(Event.CLOSE, close);
+			}
+			
+			//If U is pressed, load the XML with the maps
+			if (e.keyCode == Keyboard.U) {
+				
+				//If the world is loaded, don't do it again
+				if (!GlobalVariables.LOADED_WORLD) 
+				{
+					loadxml();
+				}
+				
+			}
 			
 		}
 		
@@ -394,84 +390,120 @@ package screens
 		{
 			var xml_Loader:URLLoader = new URLLoader();
 			xml_Loader.load(new URLRequest("../assets/map/map.xml"));
+			
+			//Once that data is loaded, the event will be passed to the do_XML function
 			xml_Loader.addEventListener(flash.events.Event.COMPLETE, doXML);
 		}
+		
+		/*-----XML LOADER-----*/
+		/*This method reads the XML file and passes the information 
+		 * to the background and foreground vectors to finally diplay them.
+		 * */
 		public function doXML(e:flash.events.Event):void {
-			// data sits in the event's target (aka the load)'s data
+			this.removeEventListener(flash.events.Event.COMPLETE, doXML);
+			
+			//Data sits in the event's target (aka the load)'s data
 			xml = new XML(e.target.data);
+			
 			var stringterrain:String = "";
 			var stringobjectswalls:String = "";
 			var stringroads:String = "";
-			onloop = true;
-			var actualoops:int = 0;
 			
+			var actualoops:int = 0;
+			var maxloops:int = 200;
+			
+			onloop = true;
+			
+			//First loop to read the which sector has to load.
 			for (var j:int = savedj; j <backgroundMap.length;j++) 
 			{
 				var k:int = 0;
 				var l:int = 0;
 				var m:int = 0;
+				
 				this.addChild(backgroundMap[j]);
 				this.addChild(foregroundMap[j]);
+				
 				stringterrain = xml.backgroundmap.(@id == j).terrainMap;
 				stringobjectswalls = xml.backgroundmap.(@id == j).objectsandwallsmap;
 				stringroads = xml.backgroundmap.(@id == j).roadsMap;
 			
+				//The second one has to copy the information from the XML to the sectors
 				for (var i:int = 0;i < backgroundMap[0].terrainMap.length ; i++) 
 				{
+					
 					if (stringobjectswalls.charAt(k) == ",") k++;
 					if (stringroads.charAt(l) == ",") l++;
 					if (stringterrain.charAt(m) == ",") m++;
-					if (stringobjectswalls.charAt(k+1) == "," || l+1 >= stringobjectswalls.length)
-					backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
-					else{ backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
-					k++
+					
+					if (stringobjectswalls.charAt(k+1) == "," || k+1 >= stringobjectswalls.length){
+						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k));
 					}
-					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length)
-					backgroundMap[j].roadsMap[i] = Number(stringroads.charAt(l));
+					else { 
+						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
+						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
+						k++
+					}
+					
+					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length){
+						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l));
+						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l));
+					}
 					else { 
 						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
+						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
 						l++
 					}
-					if (stringterrain.charAt(m+1) == "," || l+1 >= stringterrain.length)
-					backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
+					
+					if (stringterrain.charAt(m+1) == "," || m+1 >= stringterrain.length){
+						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
+						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m));
+					}
 					else {
 						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
+						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
 						m++
 					}
+					
 					k++;
 					l++;
 					m++;
-					actualoops++;
-
 					
 				}
-				backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
+				
+				//Updates the information of the layer in each one of the bacgrounds and foregrounds
+				/*backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
 				backgroundMap[j].roadsLayer.matrix = backgroundMap[j].roadsMap;
-				backgroundMap[j].terrainLayer.matrix = backgroundMap[j].terrainMap;
+				backgroundMap[j].terrainLayer.matrix = backgroundMap[j].terrainMap;*/
 				
 				backgroundMap[j].objectsAndWallsLayer.selectLayerTiles();
 				backgroundMap[j].roadsLayer.selectLayerTiles();
 				backgroundMap[j].terrainLayer.selectLayerTiles();
 				
 				
+				actualoops++;
+				
 				this.removeChild(backgroundMap[j]);
 				this.removeChild(foregroundMap[j]);
-				if (actualoops >= maxloops) {
+				
+				if (actualoops == maxloops) {
 					savedj = j;
+					
 					return;
 				}
-				this.removeEventListener(flash.events.Event.COMPLETE, doXML);
-
+				
 				
 			}
+			
 			savedj = 0;
 			actualoops = 0;
 			onloop = false;
-			slime.x = 500;
+			
+			
+			//Set the world to loaded
 			GlobalVariables.LOADED_WORLD = true;
 			reloadMaps();
-			
-				
 		}
 		
 		
@@ -518,35 +550,27 @@ package screens
 			{
 				var magicParticleToTrack:Particle = magicParticlesToAnimate[i];
 				
-				
 				if (magicParticleToTrack)
 				{
-
-				
-					
 					var rectangle:Rectangle = new Rectangle(magicParticleToTrack.x, magicParticleToTrack.y, magicParticleToTrack.width, magicParticleToTrack.height);
 					magicParticleToTrack.scaleX -= 0.01;
 					magicParticleToTrack.scaleY = magicParticleToTrack.scaleX;
 					
-					
-					
-					//magicParticleToTrack.y = (magicParticleToTrack.y - 10) ^2;
 					rectangle.y = magicParticleToTrack.y;
 					magicParticleToTrack.speedY -= magicParticleToTrack.speedY * 0.2;
 					
-					//magicParticleToTrack.x = (magicParticleToTrack.x - 10) ^ 2;
 					rectangle.x = magicParticleToTrack.x;
 					magicParticleToTrack.speedX--;
 					
 					magicParticleToTrack.rotation += deg2rad(magicParticleToTrack.spin);
 					magicParticleToTrack.spin *= 1.1;
+					
 					if (rectangle.intersects(slime.bounds) && slime.alreadyhit == false) //PQ no funciona esto??? 
 					{
 						slime.health -= player.strength;
 						slime.alreadyhit = true;
-					
 					}
-										
+					
 					if (magicParticleToTrack.scaleY <= 0.01)
 					{
 						magicParticlesToAnimate.splice(i, 1);
@@ -556,9 +580,11 @@ package screens
 				}
 				
 			}
+			
 			slime.alreadyhit = false;
 			
 		}
 		
 	}
-	}
+	
+}

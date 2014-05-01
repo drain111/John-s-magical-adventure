@@ -2,6 +2,7 @@
 bin/
 bin-debug/
 bin-release/
+.Juego/bin
 
 # Other files and folders
 .settings/

@@ -74,8 +74,6 @@ package objects
 				
 				drawTile(i, cont, actualRow, actualColumn, _dim);
 				
-				
-				
 				actualColumn++;
 				cont++;
 				

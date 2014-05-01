@@ -19,8 +19,8 @@ package
 		public static const ROWS:int = 500 / TILE_DIMENSIONS + 1;
 		public static const COLUMNS:int = 500 / TILE_DIMENSIONS + 1;
 		
-		public static const MAX_X_SECTORS:int = 30;
-		public static const MAX_Y_SECTORS:int = 30;
+		public static const MAX_X_SECTORS:int = 10;
+		public static const MAX_Y_SECTORS:int = 10;
 		
 		public function GlobalVariables() 
 		{
