@@ -366,6 +366,7 @@ package screens
 				file.addEventListener(Event.COMPLETE, saveCompleteHandler);
 				file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
 				file.save(xml, "map.xml");
+				reloadMaps();
 
 			}
 			
@@ -417,7 +418,7 @@ package screens
 			this.removeEventListener(flash.events.Event.COMPLETE, doXML);
 			
 			//Data sits in the event's target (aka the load)'s data
-			xml = new XML(e.target.data);
+			var xml2:XML = new XML(e.target.data);
 			
 			var stringterrain:String = "";
 			var stringobjectswalls:String = "";
@@ -438,9 +439,9 @@ package screens
 				this.addChild(backgroundMap[j]);
 				this.addChild(foregroundMap[j]);
 				
-				stringterrain = xml.backgroundmap.(@id == j).terrainMap;
-				stringobjectswalls = xml.backgroundmap.(@id == j).objectsandwallsmap;
-				stringroads = xml.backgroundmap.(@id == j).roadsMap;
+				stringterrain = xml2.backgroundmap.(@id == j).terrainMap;
+				stringobjectswalls = xml2.backgroundmap.(@id == j).objectsandwallsmap;
+				stringroads = xml2.backgroundmap.(@id == j).roadsMap;
 			
 				//The second one has to copy the information from the XML to the sectors
 				for (var i:int = 0;i < backgroundMap[0].terrainMap.length ; i++) 
@@ -513,7 +514,6 @@ package screens
 			savedj = 0;
 			actualoops = 0;
 			onloop = false;
-			
 			
 			//Set the world to loaded
 			GlobalVariables.LOADED_WORLD = true;

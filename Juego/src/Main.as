@@ -6,7 +6,7 @@ package
 	import screens.GameWorld;
 	import starling.core.Starling;
 
-	[SWF(frameRate = "60", width = "500", height = "500", backgroundColor = "0x333333")]
+	//[SWF(frameRate = "60", width = "800", height = "500", backgroundColor = "0x333333")]
 	
 	/**
 	 * ...
