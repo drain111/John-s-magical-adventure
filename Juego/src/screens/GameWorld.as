@@ -363,7 +363,7 @@ package screens
 					this.removeChild(foregroundMap[j]);
 				
 				}
-				file.addEventListener(Event.COMPLETE, saveCompleteHandler);
+				file.addEventListener(flash.events.Event.COMPLETE, saveCompleteHandler);
 				file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
 				file.save(xml, "map.xml");
 				reloadMaps();
@@ -395,7 +395,7 @@ package screens
 
 		}
 		//When it's saved, this is triggered
-		private function saveCompleteHandler(e:Event):void 
+		private function saveCompleteHandler(e:flash.events.Event):void 
 		{
 			this.removeEventListener(Event.COMPLETE, saveCompleteHandler);
 			trace("completed");
