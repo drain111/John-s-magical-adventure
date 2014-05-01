@@ -43,7 +43,7 @@
   <file-specs>
     <path-element>C:\Users\Borja\Documents\GitHub\John-s-magical-adventure\Juego\src\Main.as</path-element>
   </file-specs>
-  <default-background-color>#FFFFFF</default-background-color>
+  <default-background-color>#333333</default-background-color>
   <default-frame-rate>60</default-frame-rate>
   <default-size>
     <width>400</width>

@@ -9,7 +9,7 @@ package objects
 	
 	/**
 	 * ...
-	 * @author ...
+	 * @author Borja
 	 */
 	public class Editor extends Sprite 
 	{
