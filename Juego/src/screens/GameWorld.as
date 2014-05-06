@@ -363,49 +363,21 @@ package screens
 				//If the world is loaded, don't do it again
 				if (!GlobalVariables.LOADED_WORLD) 
 				{
-					loadxml();
+					doXML();
 				}
 				
 			}
 			
 		}
-		//In case of an error, this happens (full disk, no permissions,...)
-		private function saveIOErrorHandler(e:IOErrorEvent):void 
-		{
-			this.removeEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
-			try {
-				
-			}
-			catch (e){
-				trace("IOERROR")
-			}
-
-		}
-		//When it's saved, this is triggered
-		private function saveCompleteHandler(e:flash.events.Event):void 
-		{
-			this.removeEventListener(Event.COMPLETE, saveCompleteHandler);
-			trace("completed");
-		}
 		
-		private function loadxml():void 
-		{
-			var xml_Loader:URLLoader = new URLLoader();
-			xml_Loader.load(new URLRequest("../assets/map/map.xml"));
-			
-			//Once that data is loaded, the event will be passed to the do_XML function
-			xml_Loader.addEventListener(flash.events.Event.COMPLETE, doXML);
-		}
 		
 		/*-----XML LOADER-----*/
 		/*This method reads the XML file and passes the information 
 		 * to the background and foreground vectors to finally diplay them.
 		 * */
-		public function doXML(e:flash.events.Event):void {
-			this.removeEventListener(flash.events.Event.COMPLETE, doXML);
-			
+		public function doXML(/*e:flash.events.Event*/):void {			
 			//Data sits in the event's target (aka the load)'s data
-			var xml2:XML = new XML(e.target.data);
+			var xml2:XML = new XML(new Assets.MapXmlGame);
 			
 			var stringterrain:String = "";
 			var stringobjectswalls:String = "";
@@ -440,33 +412,28 @@ package screens
 					
 					if (stringobjectswalls.charAt(k+1) == "," || k+1 >= stringobjectswalls.length){
 						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k));
 					}
 					else { 
 						backgroundMap[j].objectsAndWallsMap[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
-						backgroundMap[j].objectsAndWallsLayer.matrix[i] = int(stringobjectswalls.charAt(k)) * 10 + int(stringobjectswalls.charAt(k + 1));
 						k++
 					}
 					
 					if (stringroads.charAt(l+1) == "," || l+1 >= stringroads.length){
 						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l));
-						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l));
 					}
 					else { 
 						backgroundMap[j].roadsMap[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
-						backgroundMap[j].roadsLayer.matrix[i] = int(stringroads.charAt(l)) * 10 + int(stringroads.charAt(l + 1));
 						l++
 					}
 					
 					if (stringterrain.charAt(m+1) == "," || m+1 >= stringterrain.length){
 						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m));
-						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m));
 					}
 					else {
 						backgroundMap[j].terrainMap[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
-						backgroundMap[j].terrainLayer.matrix[i] = int(stringterrain.charAt(m)) * 10 + int(stringterrain.charAt(m + 1));
 						m++
 					}
+					
 					
 					k++;
 					l++;
@@ -475,9 +442,9 @@ package screens
 				}
 				
 				//Updates the information of the layer in each one of the bacgrounds and foregrounds
-				/*backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
+				backgroundMap[j].objectsAndWallsLayer.matrix = backgroundMap[j].objectsAndWallsMap;
 				backgroundMap[j].roadsLayer.matrix = backgroundMap[j].roadsMap;
-				backgroundMap[j].terrainLayer.matrix = backgroundMap[j].terrainMap;*/
+				backgroundMap[j].terrainLayer.matrix = backgroundMap[j].terrainMap;
 				
 				backgroundMap[j].objectsAndWallsLayer.selectLayerTiles();
 				backgroundMap[j].roadsLayer.selectLayerTiles();

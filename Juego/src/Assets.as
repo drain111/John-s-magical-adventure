@@ -21,6 +21,9 @@ package
 		private static var gameTextureAtlas:TextureAtlas;
 		//private static var gameTextureMage:TextureAtlas;
 		
+		[Embed(source = "../assets/map/map.xml", mimeType = "application/octet-stream")]
+		public static const MapXmlGame:Class;
+		
 		[Embed(source = "../assets/graphics/myspritesheet.png")]
 		public static const AtlasTextureGame:Class;
 		
