@@ -24,7 +24,9 @@ package objects
 		private var _directiony:int;
 		private var _heroArt:MovieClip;
 		private var _strength:int;
-        
+		
+		private var _hitbox:Image;
+        private var _colliding:Boolean = false;
 		
 		private var _posx:int;
 		private var _posy:int;
@@ -34,9 +36,12 @@ package objects
         private var isLeft:Boolean = false;
         private var isUp:Boolean = false;
         private var isDown:Boolean = false;
+		
+		private var _lastPosition:Point;
+		private var _nextPosition:Point;
 
 		
-		public function Player() 
+		public function Player(worldhitbox:Image) 
 		{
 			super();
 
@@ -50,23 +55,53 @@ package objects
 			_magic.push(1);
 			_magic.push(0);
 			
+			_hitbox = worldhitbox;
+			
 			_strength = 10;
 			_actualimage = 2;
+			
+			_lastPosition = new Point(0, 0);
+			_nextPosition = new Point(0, 0);
+			
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		private function onAddedToStage(event:Event):void
 		{
+			
+			this.addChild(_hitbox);
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			this.addEventListener(Event.ENTER_FRAME, update);
+			//this.addEventListener(Event.ENTER_FRAME, update);
 			createHeroArt();
 		}
-		private function update(event:Event):void
+		
+		public function firstUpdate():void
 		{
-			if (isUp) y -= 2;
-			else if(isDown) y += 2;
-			else if(isLeft) x -= 2;
-			else if (isRight) x += 2;
+			if (isUp) _nextPosition.y -= 2;
+			else if(isDown) _nextPosition.y += 2;
+			else if(isLeft) _nextPosition.x -= 2;
+			else if (isRight) _nextPosition.x += 2;
+			
+			hitbox.x = _nextPosition.x;
+			hitbox.y = _nextPosition.y;
 		}
+		
+		public function secondUpdate():void
+		{
+			if (colliding) 
+			{
+				if (isUp) _nextPosition.y += 2;
+				else if(isDown) _nextPosition.y -= 2;
+				else if(isLeft) _nextPosition.x += 2;
+				else if (isRight) _nextPosition.x -= 2;
+				colliding = false;
+				trace("NOT COLLIDING");
+			}
+			else _lastPosition = _nextPosition;
+			
+			x = _nextPosition.x;
+			y = _nextPosition.y;
+		}
+		
 		private function createHeroArt():void
 		{
 			heroArt = new MovieClip(Assets.getAtlas().getTextures("Magestb"),10);
@@ -252,6 +287,46 @@ package objects
 		public function set heroArt(value:MovieClip):void 
 		{
 			_heroArt = value;
+		}
+		
+		public function get lastPosition():Point 
+		{
+			return _lastPosition;
+		}
+		
+		public function set lastPosition(value:Point):void 
+		{
+			_lastPosition = value;
+		}
+		
+		public function get nextPosition():Point 
+		{
+			return _nextPosition;
+		}
+		
+		public function set nextPosition(value:Point):void 
+		{
+			_nextPosition = value;
+		}
+		
+		public function get hitbox():Image 
+		{
+			return _hitbox;
+		}
+		
+		public function set hitbox(value:Image):void 
+		{
+			_hitbox = value;
+		}
+		
+		public function get colliding():Boolean 
+		{
+			return _colliding;
+		}
+		
+		public function set colliding(value:Boolean):void 
+		{
+			_colliding = value;
 		}
 		
 		

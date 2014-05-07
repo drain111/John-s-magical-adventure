@@ -1,5 +1,6 @@
 package screens 
 {
+	import events.Physics;
 	import flash.display.Loader;
 	import flash.events.IOErrorEvent;
 	import flash.geom.Rectangle;
@@ -58,6 +59,7 @@ package screens
 		private var particle:PDParticleSystem;
 		
 		private var player:Player;
+		private var hitBoxPlayer:Image;
 		
 		private var magicParticlesToAnimate:Vector.<Particle>
 		
@@ -70,6 +72,8 @@ package screens
 		private var savedj:int = 0;
 		
 		private var onloop:Boolean = false;
+		
+		private var physics:Physics;
 		
 		/*-----INITIALIZE-----*/
 		public function GameWorld() 
@@ -123,7 +127,9 @@ package screens
 			magicParticlesToAnimate = new Vector.<Particle>();
 			
 			//Create the player, camera and slime
-			player = new Player();
+			hitBoxPlayer = new Image(Assets.getAtlas().getTexture("hitbox_1"));
+			player = new Player(hitBoxPlayer);
+			this.addChild(hitBoxPlayer);
 			this.addChild(player);
 			this.camera = new Camera(editor);
 			this.addChild(camera);
@@ -131,6 +137,9 @@ package screens
 			slime.x = 40;
 			slime.y = 40;
 			this.addChild(slime);
+			
+			//Start physics engine
+			physics = new Physics();
 			
 			//Load maps for the first time.
 			reloadMaps();
@@ -146,6 +155,15 @@ package screens
 		//Update method.
 		private function update(e:Event):void 
 		{
+			//Update player position
+			
+			player.firstUpdate();
+			for (var i:int = 0; i < loadedForegroundMaps.length; i++) 
+			{
+				physics.calculatePlayerCollisionsWithWalls(player, loadedForegroundMaps[i].hitboxesLayer.tiles, loadedForegroundMaps[i].hitboxesLayer.matrix);
+			}
+			player.secondUpdate();
+			
 			//Update camera
 			this.x = camera.posX;
 			this.y = camera.posY;
@@ -169,7 +187,7 @@ package screens
 			//Remove the enemy if it dies.
 			if (slime.health <= 0) this.removeChild(slime);
 			
-			if (onloop == true && !GlobalVariables.LOADED_WORLD) loadxml();
+			if (onloop == true && !GlobalVariables.LOADED_WORLD) doXML();
 		}
 		
 		/*-----RELOAD MAPS METHOD-----*/
@@ -185,6 +203,7 @@ package screens
 				this.removeChild(editor);
 				this.removeChild(player);
 				this.removeChild(slime);
+				this.removeChild(hitBoxPlayer);
 				//this.removeChild(camera);
 			}
 			
@@ -215,7 +234,7 @@ package screens
 			
 			//Add the player and enemies.
 			this.addChild(player);
-
+			this.addChild(hitBoxPlayer);
 			this.addChild(slime);
 			
 			//Finally add the foregrounds
@@ -352,8 +371,8 @@ package screens
 					this.removeChild(foregroundMap[j]);
 				
 				}
-				file.addEventListener(flash.events.Event.COMPLETE, saveCompleteHandler);
-				file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
+				//file.addEventListener(flash.events.Event.COMPLETE, saveCompleteHandler);
+				//file.addEventListener(IOErrorEvent.IO_ERROR, saveIOErrorHandler);
 				file.save(xml, "map.xml");
 				reloadMaps();
 			}

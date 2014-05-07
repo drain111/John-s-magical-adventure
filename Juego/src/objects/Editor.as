@@ -128,18 +128,20 @@ package objects
 			
 			if (e.keyCode == Keyboard.R) 
 			{
-				if (this._layer == 6) this._layer = 1;
+				if (this._layer == 7) this._layer = 1;
 				else this._layer += 1;
 				this._tileSelected = this._firstIndexImage;
 				this._lastTileSelected = this._lastIndexImage;
+				refreshLayerImageEditor();
 				this.changeImage();
 			}
 			if (e.keyCode == Keyboard.F) 
 			{
-				if (this._layer == 1) this._layer = 6;
+				if (this._layer == 1) this._layer = 7;
 				else this._layer -= 1;
 				this._tileSelected = this._firstIndexImage;
 				this._lastTileSelected = this._lastIndexImage;
+				refreshLayerImageEditor();
 				this.changeImage();
 			}
 			
@@ -167,6 +169,25 @@ package objects
 			this._realXpos = _Xpos * _editorDim;
 			this._realYpos = _Ypos * _editorDim;
 			
+			
+		}
+		
+		private function changeImage():void {
+			if (this._tileSelected != 0) 
+			{
+				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
+				this._lastTileSelected = this._tileSelected;
+			}
+			else 
+			{
+				this._tileSelected = this._lastTileSelected;
+				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
+			}
+			
+		}
+		
+		private function refreshLayerImageEditor():void {
+			
 			switch (this._layer) {
 				case 1:
 					this._layerName = "terrain";
@@ -192,27 +213,17 @@ package objects
 					this._layerName = "ceilings";
 					this._lastIndexImage = 10;
 					break;
+				case 7:
+					this._layerName = "hitbox";
+					this._lastIndexImage = 1;
+					break;
 				default:
 					this._layerName = "terrain";
 					this._lastIndexImage = 17;
 					break;
 			}
-		}
-		
-		private function changeImage():void {
-			if (this._tileSelected != 0) 
-			{
-				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
-				this._lastTileSelected = this._tileSelected;
-			}
-			else 
-			{
-				this._tileSelected = this._lastTileSelected;
-				this._image.texture = Assets.getAtlas().getTexture(this._layerName + "_" + _tileSelected);
-			}
 			
 		}
-		
 		
 		public function get changeMapTile():Boolean {
 			return this._changeMapTile;

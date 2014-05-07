@@ -11,7 +11,7 @@ package objects
 	public class BgLayer extends Sprite 
 	{	
 		private var _matrix:Array;
-		private var _tiles:Array;
+		private var _tiles:Vector.<Image>;
 		
 		private var _sectorX:int;
 		private var _sectorY:int;
@@ -31,7 +31,7 @@ package objects
 		{
 			super();
 			this._matrix = new Array();
-			this._tiles = new Array();
+			this._tiles = new Vector.<Image>();
 			
 			this._sectorX = sectorX;
 			this._sectorY = sectorY;
@@ -162,5 +162,19 @@ package objects
 		{
 			_matrix = value;
 		}
+		
+		public function get tiles():Vector.<Image> 
+		{
+			return _tiles;
+		}
+		
+		public function set tiles(value:Vector.<Image>):void 
+		{
+			_tiles = value;
+		}
+		
+		
+		
+		
 	}
 }

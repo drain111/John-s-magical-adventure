@@ -16,6 +16,7 @@ package objects
 		private var _objectsMap:Array;
 		private var _treesMap:Array;
 		private var _ceilingsMap:Array;
+		private var _hitboxesMap:Array;
 		
 		private var _editor:Editor;
 		
@@ -30,6 +31,7 @@ package objects
 		private var _objectsLayer:BgLayer;
 		private var _treesLayer:BgLayer;
 		private var _ceilingsLayer:BgLayer;
+		private var _hitboxesLayer:BgLayer;
 		
 		public function GameForeground(sectorX:int, sectorY:int, editor:Editor) 
 		{
@@ -40,13 +42,12 @@ package objects
 			
 			_editor = editor;
 			
+			tileDimension = GlobalVariables.TILE_DIMENSIONS;
 			
-			tileDimension = 36;
+			_editor.editorDim =  GlobalVariables.TILE_DIMENSIONS;
 			
-			_editor.editorDim =  tileDimension;
-			
-			rows = 500 / tileDimension + 1;
-			columns = 500 / tileDimension + 1;
+			rows = GlobalVariables.ROWS;
+			columns = GlobalVariables.COLUMNS;
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -66,11 +67,16 @@ package objects
 			createVoidTileMap(_ceilingsMap, rows, columns, false);
 			_ceilingsLayer = new BgLayer("ceilings", _sectorX, _sectorY, 6, rows, columns, tileDimension, _ceilingsMap, editor, true);
 			
+			_hitboxesMap = new Array;
+			createVoidTileMap(_hitboxesMap, rows, columns, false);
+			_hitboxesLayer = new BgLayer("hitbox", _sectorX, _sectorY, 7, rows, columns, tileDimension, _hitboxesMap, editor, true);
+			
 			this.addChild(_objectsLayer);
 			this.addChild(_treesLayer);
 			this.addChild(_ceilingsLayer);
+			this.addChild(_hitboxesLayer);
 			
-			this.addChild(editor);
+			//this.addChild(editor);
 		}
 		
 		private static function createVoidTileMap(map:Array, rows:int, columns:int, visible:Boolean):void {
@@ -124,6 +130,16 @@ package objects
 		public function set ceilingsMap(value:Array):void 
 		{
 			_ceilingsMap = value;
+		}
+		
+		public function get hitboxesLayer():BgLayer 
+		{
+			return _hitboxesLayer;
+		}
+		
+		public function set hitboxesLayer(value:BgLayer):void 
+		{
+			_hitboxesLayer = value;
 		}
 	}
 }
